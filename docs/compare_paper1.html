@@ -473,16 +473,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree0efe457dfb994497fb54442763433f7cabff184atargetblank0efe457a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/xsun1229/heart_atlas/tree/0efe457dfb994497fb54442763433f7cabff184a" target="_blank">0efe457</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree7a62b4c4e66825b2b6e949bd4ac0645d35ebc84atargetblank7a62b4ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/xsun1229/heart_atlas/tree/7a62b4c4e66825b2b6e949bd4ac0645d35ebc84a" target="_blank">7a62b4c</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree0efe457dfb994497fb54442763433f7cabff184atargetblank0efe457a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree7a62b4c4e66825b2b6e949bd4ac0645d35ebc84atargetblank7a62b4ca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/xsun1229/heart_atlas/tree/0efe457dfb994497fb54442763433f7cabff184a" target="_blank">0efe457</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/xsun1229/heart_atlas/tree/7a62b4c4e66825b2b6e949bd4ac0645d35ebc84a" target="_blank">7a62b4c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -531,6 +531,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/7a62b4c4e66825b2b6e949bd4ac0645d35ebc84a/analysis/compare_paper1.Rmd" target="_blank">7a62b4c</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-07-22
+</td>
+<td>
+update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xsun1229/heart_atlas/7a62b4c4e66825b2b6e949bd4ac0645d35ebc84a/docs/compare_paper1.html" target="_blank">7a62b4c</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-07-22
+</td>
+<td>
+update
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -661,7 +695,7 @@ XSun
   res = sum(width(intersect(query, reference))) / sum(as.numeric(width(union(query, reference))))
   return(res)
 }</code></pre>
-<p>This is the heatmap for all peaks.</p>
+<p>This is the heatmap for all peaks. Since the data for Lymphocyte in the new dataset is unavailable, there are just 8 columns in this plot.</p>
 <pre class="r"><code>load(&quot;/project2/xinhe/xsun/atlas/jaccard_heatmap/jcd_matrix_all_uniq.rdata&quot;)
 Heatmap(matrix = jcd_matrix, cluster_rows = F, 
         cluster_columns = F, show_row_names = T, row_names_side = &quot;left&quot;,
@@ -764,7 +798,7 @@ XSun
 </div>
 <div id="a-direct-comparison-between-the-cardiomycyte-peak-sets" class="section level1">
 <h1>A direct comparison between the Cardiomycyte peak sets</h1>
-<p><img src="figure/compare_paper1.Rmd/unnamed-chunk-6-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="figure/compare_paper1.Rmd/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
 Past versions of unnamed-chunk-6-1.png
@@ -789,6 +823,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/7a62b4c4e66825b2b6e949bd4ac0645d35ebc84a/docs/figure/compare_paper1.Rmd/unnamed-chunk-6-1.png" target="_blank">7a62b4c</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-07-22
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/xsun1229/heart_atlas/blob/0efe457dfb994497fb54442763433f7cabff184a/docs/figure/compare_paper1.Rmd/unnamed-chunk-6-1.png" target="_blank">0efe457</a>
 </td>
 <td>
@@ -802,9 +847,62 @@ XSun
 </table>
 </div>
 </div>
-<figure class="half">
-<pre><code>&lt;img src=&quot;https://github.com/xsun1229/heart_atlas/raw/master/output/venn_all_ours_paper1.jpg&quot; width=&quot;100%&quot;&gt;</code></pre>
-</figure>
+</div>
+<div id="peak-quality-and-overlap-proportion-for-all-peaks" class="section level1">
+<h1>Peak quality and overlap proportion (for all peaks)</h1>
+<p>We sorted our peak data by their quality (FDR). Then we computed the cumulative proportion that our peaks overlap with the new data. In the scatter plots below, each dot represents a peak range in our data set. Red dots mean the peak ranges do not overlap with the peaks in new data. The plot shows that the peaks have lower quality tend to not overlap with new data set since there are more dots in red when FDR getting larger.</p>
+<p>We only made plots for the pairs show correlation in heatmap.</p>
+<pre class="r"><code>ocr &lt;- readRDS(&quot;/project2/gca/aselewa/heart_atlas_project/ArchR/ArchR_heart_latest_noAtrium/PeakCalls/DA_MARKERS_FDRP_1_log2FC_1.rds&quot;)
+ocr_select &lt;- c(1,1,2,3,5,6,7,8)
+celltype_new &lt;- c(&quot;Ventricular_cardiomyocyte&quot;,&quot;Atrial_cardiomyocyte&quot;,&quot;Endothelial&quot;,&quot;Fibroblast&quot;,&quot;Macrophage&quot;,&quot;Nervous&quot;,&quot;Smooth_muscle&quot;,&quot;Smooth_muscle&quot;)
+
+folder_out &lt;- &quot;/project2/xinhe/xsun/atlas/cdf_plots/&quot;
+
+p &lt;- list()
+for (i in 1:length(ocr_select)) {
+  
+  dat_our &lt;- ocr[[ocr_select[i]]]
+  extraCols_narrowPeak &lt;- c(signalValue = &quot;numeric&quot;, pValue = &quot;numeric&quot;,
+                            qValue = &quot;numeric&quot;, peak = &quot;integer&quot;)
+  dat_new &lt;- import(paste0(&quot;/project2/xinhe/xsun/atlas/peakdata_ren/celltype/&quot;,celltype_new[i],&quot;.narrowPeak.bed&quot;), format = &quot;BED&quot;,
+                    extraCols = extraCols_narrowPeak)
+  dat_new &lt;- unique(dat_new)
+  
+  df_our &lt;- cbind(as.data.frame(dat_our@seqnames),as.data.frame(dat_our@ranges@start),as.data.frame(dat_our@ranges@width),dat_our$Log2FC,dat_our$FDR)
+  colnames(df_our) &lt;- c(&quot;chr&quot;,&quot;start&quot;,&quot;width&quot;,&quot;Log2FC&quot;,&quot;FDR&quot;)
+  df_our$index &lt;- 0
+  
+  overlap_index &lt;- findOverlaps(dat_our,dat_new)
+  index_our &lt;- overlap_index@from
+  index_our_uniq &lt;- index_our[!duplicated(index_our)]
+  df_our$index[index_our_uniq] &lt;- 1
+  
+  df_our$persentage &lt;- as.numeric(as.character(df_our$index))/sum(as.numeric(as.character(df_our$index)))
+  df_our_sort &lt;- df_our[order(as.numeric(as.character(df_our$FDR))),]
+  df_our_sort$cumsum &lt;- cumsum(df_our_sort$persentage)
+  df_our_sort$order &lt;- seq(1:nrow(df_our_sort))
+  
+  save(df_our_sort, file = paste0(folder_out,names(ocr)[ocr_select[i]],&quot;_df.rdata&quot;)) 
+  
+  p[[i]] &lt;- ggplot(df_our_sort, aes(x=order,y=cumsum)) + 
+    theme_bw(base_line_size =0.3) +
+    
+    geom_point(aes(colour = factor(index))) +
+    scale_color_manual(&quot;overlap&quot;,values=c(&quot;red&quot;, &quot;grey&quot;),labels = c(&quot;no&quot;, &quot;yes&quot;)) +
+    
+    xlab(&quot;Order by FDR from our data (low to high)&quot;) + ylab(&quot;Cumulative percentage of overlapped peaks&quot;) +
+    ggtitle(paste0(names(ocr)[ocr_select[i]],&quot;(ours)&quot;,&quot;\n and \n &quot;,celltype_new[i], &quot;(new)&quot;)) +
+    
+    theme(plot.title = element_text(hjust = 0.5)) +
+    
+    annotate(&quot;text&quot;, x = length(dat_our) *0.2, y = 1, label = paste0(&quot;number of peaks_our = &quot;, length(dat_our))) +
+    annotate(&quot;text&quot;, x = length(dat_our) *0.2, y = 0.95, label = paste0(&quot;number of peaks_new = &quot;, length(dat_new))) +
+    annotate(&quot;text&quot;, x = length(dat_our) *0.2, y = 0.9, label = paste0(&quot;number of peaks_overlap = &quot;, sum(df_our_sort$index)))
+  
+}
+
+all &lt;- grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]],p[[6]],p[[7]],p[[8]], nrow = 2)</code></pre>
+<p><img src="figure/compare_paper1.Rmd/unnamed-chunk-7-1.png" width="1920" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

@@ -62,7 +62,7 @@ genomicCorr.jaccard = function(query, reference) {
 }
 ```
 
-This is the heatmap for all peaks. 
+This is the heatmap for all peaks. Since the data for Lymphocyte in the new dataset is unavailable, there are just 8 columns in this plot.
 ```{r fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
 load("/project2/xinhe/xsun/atlas/jaccard_heatmap/jcd_matrix_all_uniq.rdata")
 Heatmap(matrix = jcd_matrix, cluster_rows = F, 
@@ -96,10 +96,8 @@ Heatmap(matrix = jcd_matrix, cluster_rows = F,
 
 # A direct comparison between the Cardiomycyte peak sets
 
-
-```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=20}
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=10}
 p<- list()
-
 
 ##########
 ocr <- readRDS("/project2/gca/aselewa/heart_atlas_project/ArchR/ArchR_heart_latest_noAtrium/PeakCalls/DA_MARKERS_FDRP_1_log2FC_1.rds")
@@ -167,8 +165,64 @@ all <- grid.arrange(p[[1]],p[[3]],p[[2]],p[[4]], nrow = 2)
 ```
 
 
-<figure class="half">
-    <img src="https://github.com/xsun1229/heart_atlas/raw/master/output/venn_all_ours_paper1.jpg" width="100%">
-</figure>
 
+# Peak quality and overlap proportion (for all peaks)
+
+We sorted our peak data by their quality (FDR). Then we computed the cumulative proportion that our peaks overlap with the new data. In the scatter plots below, each dot represents a peak range in our data set. Red dots mean the peak ranges do not overlap with the peaks in new data. The plot shows that the peaks have lower quality tend to not overlap with new data set since there are more dots in red when FDR getting larger. 
+
+We only made plots for the pairs show correlation in heatmap.
+
+```{r  message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=20}
+ocr <- readRDS("/project2/gca/aselewa/heart_atlas_project/ArchR/ArchR_heart_latest_noAtrium/PeakCalls/DA_MARKERS_FDRP_1_log2FC_1.rds")
+ocr_select <- c(1,1,2,3,5,6,7,8)
+celltype_new <- c("Ventricular_cardiomyocyte","Atrial_cardiomyocyte","Endothelial","Fibroblast","Macrophage","Nervous","Smooth_muscle","Smooth_muscle")
+
+folder_out <- "/project2/xinhe/xsun/atlas/cdf_plots/"
+
+p <- list()
+for (i in 1:length(ocr_select)) {
+  
+  dat_our <- ocr[[ocr_select[i]]]
+  extraCols_narrowPeak <- c(signalValue = "numeric", pValue = "numeric",
+                            qValue = "numeric", peak = "integer")
+  dat_new <- import(paste0("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/",celltype_new[i],".narrowPeak.bed"), format = "BED",
+                    extraCols = extraCols_narrowPeak)
+  dat_new <- unique(dat_new)
+  
+  df_our <- cbind(as.data.frame(dat_our@seqnames),as.data.frame(dat_our@ranges@start),as.data.frame(dat_our@ranges@width),dat_our$Log2FC,dat_our$FDR)
+  colnames(df_our) <- c("chr","start","width","Log2FC","FDR")
+  df_our$index <- 0
+  
+  overlap_index <- findOverlaps(dat_our,dat_new)
+  index_our <- overlap_index@from
+  index_our_uniq <- index_our[!duplicated(index_our)]
+  df_our$index[index_our_uniq] <- 1
+  
+  df_our$persentage <- as.numeric(as.character(df_our$index))/sum(as.numeric(as.character(df_our$index)))
+  df_our_sort <- df_our[order(as.numeric(as.character(df_our$FDR))),]
+  df_our_sort$cumsum <- cumsum(df_our_sort$persentage)
+  df_our_sort$order <- seq(1:nrow(df_our_sort))
+  
+  save(df_our_sort, file = paste0(folder_out,names(ocr)[ocr_select[i]],"_df.rdata")) 
+  
+  p[[i]] <- ggplot(df_our_sort, aes(x=order,y=cumsum)) + 
+    theme_bw(base_line_size =0.3) +
+    
+    geom_point(aes(colour = factor(index))) +
+    scale_color_manual("overlap",values=c("red", "grey"),labels = c("no", "yes")) +
+    
+    xlab("Order by FDR from our data (low to high)") + ylab("Cumulative percentage of overlapped peaks") +
+    ggtitle(paste0(names(ocr)[ocr_select[i]],"(ours)","\n and \n ",celltype_new[i], "(new)")) +
+    
+    theme(plot.title = element_text(hjust = 0.5)) +
+    
+    annotate("text", x = length(dat_our) *0.2, y = 1, label = paste0("number of peaks_our = ", length(dat_our))) +
+    annotate("text", x = length(dat_our) *0.2, y = 0.95, label = paste0("number of peaks_new = ", length(dat_new))) +
+    annotate("text", x = length(dat_our) *0.2, y = 0.9, label = paste0("number of peaks_overlap = ", sum(df_our_sort$index)))
+  
+}
+
+all <- grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]],p[[6]],p[[7]],p[[8]], nrow = 2)
+
+```
 
