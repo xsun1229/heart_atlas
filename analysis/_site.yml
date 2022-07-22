@@ -12,7 +12,7 @@ navbar:
   right:
   - icon: fa-github
     text: Source code
-    href: https://github.com/myname/heart_atlas
+    href: https://github.com/xsun1229/heart_atlas
 output:
   workflowr::wflow_html:
     toc: yes
