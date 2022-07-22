@@ -47,7 +47,6 @@ for (i in 1:length(files)){
 }
 
 all <- grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]],p[[6]],p[[7]],p[[8]], nrow = 2)
-all
 ```
 
 
@@ -96,6 +95,77 @@ Heatmap(matrix = jcd_matrix, cluster_rows = F,
 
 
 # A direct comparison between the Cardiomycyte peak sets
+
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=20}
+p<- list()
+
+
+##########
+ocr <- readRDS("/project2/gca/aselewa/heart_atlas_project/ArchR/ArchR_heart_latest_noAtrium/PeakCalls/DA_MARKERS_FDRP_1_log2FC_1.rds")
+dat_our <- ocr[[1]]
+extraCols_narrowPeak <- c(signalValue = "numeric", pValue = "numeric",
+                          qValue = "numeric", peak = "integer")
+dat_new <- import("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/Atrial_cardiomyocyte.narrowPeak.bed", format = "BED",
+                  extraCols = extraCols_narrowPeak)
+dat_new2 <- unique(dat_new)
+
+overlap <- GenomicRanges::intersect(dat_new2,dat_our)
+num_uniq_new <- length(dat_new2) - length(overlap)
+
+dat_plot <- list(A = 1:length(dat_new2), B = (num_uniq_new+1 ): (num_uniq_new + length(dat_our) ))  
+names(dat_plot) <- c("aCM(new)","CM(ours)")
+p[[1]] <- ggvenn(dat_plot, fill_alpha = 0) + 
+  ggtitle("Atrial Cardiomyocyte \n VS \n Cardiomyocyte (all peaks)") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+########
+dat_new <- import("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/Ventricular_cardiomyocyte.narrowPeak.bed", format = "BED",
+                  extraCols = extraCols_narrowPeak)
+dat_new2 <- unique(dat_new)
+
+overlap <- GenomicRanges::intersect(dat_new2,dat_our)
+num_uniq_new <- length(dat_new2) - length(overlap)
+
+dat_plot <- list(A = 1:length(dat_new2), B = (num_uniq_new+1 ): (num_uniq_new + length(dat_our) ))  
+names(dat_plot) <- c("vCM(new)","CM(ours)")
+p[[2]] <- ggvenn(dat_plot, fill_alpha = 0) + 
+  ggtitle("Ventricular Cardiomyocyte \n VS \n Cardiomyocyte (all peaks)") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+########
+
+ocr <- readRDS("/project2/gca/aselewa/heart_atlas_project/eQTL_enrich/OCR_disjoint_categories.grlist.rds")
+dat_our <- ocr[[1]]
+dat_new <- import("/project2/xinhe/xsun/atlas/peakdata_ren/specific/Atrial_cardiomyocyte.specific.elements.bed")
+dat_new2 <- unique(dat_new)
+
+overlap <- GenomicRanges::intersect(dat_new2,dat_our)
+num_uniq_new <- length(dat_new2) - length(overlap)
+
+dat_plot <- list(A = 1:length(dat_new2), B = (num_uniq_new+1 ): (num_uniq_new + length(dat_our) ))  
+names(dat_plot) <- c("aCM(new)","CM(ours)")
+p[[3]] <- ggvenn(dat_plot, fill_alpha = 0) + 
+  ggtitle("Atrial Cardiomyocyte \n VS \n Cardiomyocyte (disjoint peaks)") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+######
+dat_new <- import("/project2/xinhe/xsun/atlas/peakdata_ren/specific/Ventricular_cardiomyocyte.specific.elements.bed")
+dat_new2 <- unique(dat_new)
+
+overlap <- GenomicRanges::intersect(dat_new2,dat_our)
+num_uniq_new <- length(dat_new2) - length(overlap)
+
+dat_plot <- list(A = 1:length(dat_new2), B = (num_uniq_new+1 ): (num_uniq_new + length(dat_our) ))  
+names(dat_plot) <- c("vCM(new)","CM(ours)")
+p[[4]] <- ggvenn(dat_plot, fill_alpha = 0) + 
+  ggtitle("Ventricular Cardiomyocyte \n VS \n Cardiomyocyte (disjoint peaks)") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+all <- grid.arrange(p[[1]],p[[3]],p[[2]],p[[4]], nrow = 2)
+
+```
+
 
 <figure class="half">
     <img src="https://github.com/xsun1229/heart_atlas/raw/master/output/venn_all_ours_paper1.jpg" width="100%">
