@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "Heart-atlas"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
@@ -8,4 +8,28 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to my research website.
+We are trying to To address the reviewers comments for 'Heart-atlas' project here. 
+
+# Comments
+
+1a. Compare cell type clusters with two other single-cell chromatin studies in heart tissue ( https://pubmed.ncbi.nlm.nih.gov/33990324/ and https://pubmed.ncbi.nlm.nih.gov/34774128/ ). The first paper specifically focused on the heart, the second one mapped accessibility across many human tissues.
+
+1b. Compare OCRs with existing single-cell studies
+
+2. Explain why most open chromatin regions (OCRs) with cell-type-specific accessibility are enriched in intronic regions
+
+# Approaches
+
+Compare our data with published snATAC-seq data from the Ren lab (2 different papers).
+ 
+a. Compare OCRs with existing single-cell studies
+
+b. Obtain the genomic distribution of the cell-type-specific peaks .
+
+# Results 
+
+## Comparison with the first dataset
+
+[Details]()
+
+

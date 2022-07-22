@@ -1,0 +1,16 @@
+---
+title: "Comparison with the first dataset"
+author: "XSun"
+date: "2022-07-22"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+We compare the OCRs from our dataset with another [paper](https://pubmed.ncbi.nlm.nih.gov/33990324/) here.The peak calls are available [here](http://cepigenomics.org/CARE_portal/Cell_Type_Diversity.html). There are two levels of peaks- the peaks called on different clusters using MACS2 and peaks determined to be specifically accessible in a given cell type.
+
+### Si
+
+We first calculated the Jaccard index for each pairwise comparison between the two data sets. The results are display by heatmaps colored by jaccard index value
