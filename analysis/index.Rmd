@@ -30,6 +30,6 @@ b. Obtain the genomic distribution of the cell-type-specific peaks .
 
 ## Comparison with the first dataset
 
-[Details]()
+[Details](https://xsun1229.github.io/heart_atlas/compare_paper1.html)
 
 

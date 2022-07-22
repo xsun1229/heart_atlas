@@ -7,10 +7,98 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Introduction
+```{r, echo = FALSE}
+suppressMessages(library(rtracklayer))
+suppressMessages(library(ggplot2))
+suppressMessages(library(ComplexHeatmap))
+suppressMessages(library(gridExtra))
+suppressMessages(library(ggvenn))
+```
+
+
+# Introduction
 
 We compare the OCRs from our dataset with another [paper](https://pubmed.ncbi.nlm.nih.gov/33990324/) here.The peak calls are available [here](http://cepigenomics.org/CARE_portal/Cell_Type_Diversity.html). There are two levels of peaks- the peaks called on different clusters using MACS2 and peaks determined to be specifically accessible in a given cell type.
 
-### Si
 
-We first calculated the Jaccard index for each pairwise comparison between the two data sets. The results are display by heatmaps colored by jaccard index value
+# Distribution of peak ranges (all peaks)
+
+The peak ranges of our data were fixed to 501bp.
+
+The range of the new data set:
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=20}
+setwd("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/")
+files <- list.files("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/")
+celltypes <- unlist(strsplit(files,split = ".narrowPeak.bed"))
+extraCols_narrowPeak <- c(signalValue = "numeric", pValue = "numeric",qValue = "numeric", peak = "integer")
+
+p <- list()
+for (i in 1:length(files)){
+  dat_new <- import(files[i], format = "BED",extraCols = extraCols_narrowPeak)
+  dat_new <- unique(dat_new)
+  
+  dist <- data.frame(width(dat_new))
+  colnames(dist) <- "width"
+  p[[i]] <- ggplot(dist, aes(x=width)) + geom_histogram() + theme_bw(base_line_size =0.3) +
+    ggtitle(celltypes[i])  +
+    theme(plot.title = element_text(hjust = 0.5)) 
+  
+}
+
+all <- grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]],p[[6]],p[[7]],p[[8]], nrow = 2)
+all
+```
+
+
+# Similarity between the two data sets
+
+We first calculated the Jaccard index for each pairwise comparison between the two data sets. The results are displayed by heatmaps colored by jaccard index value.
+
+We computed Jaccard index using:
+```{r}
+genomicCorr.jaccard = function(query, reference) {
+  res = sum(width(intersect(query, reference))) / sum(as.numeric(width(union(query, reference))))
+  return(res)
+}
+```
+
+This is the heatmap for all peaks. 
+```{r fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
+load("/project2/xinhe/xsun/atlas/jaccard_heatmap/jcd_matrix_all_uniq.rdata")
+Heatmap(matrix = jcd_matrix, cluster_rows = F, 
+        cluster_columns = F, show_row_names = T, row_names_side = "left",
+        name = "Jaccard Index",
+        col = circlize::colorRamp2(c(0, 0.3), c("white","firebrick")), ###modify the figures
+        row_title = NULL,
+        column_title = NULL,
+        row_gap = unit(1, "mm"),
+        column_gap = unit(1, "mm"),
+        na_col = "white",
+        use_raster = T)
+```
+
+
+This is the heatmap for disjoint peaks. 
+```{r fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
+load("/project2/xinhe/xsun/atlas/jaccard_heatmap/jcd_matrix_disjoint_uniq.rdata")
+Heatmap(matrix = jcd_matrix, cluster_rows = F, 
+        cluster_columns = F, show_row_names = T, row_names_side = "left",
+        name = "Jaccard Index",
+        col = circlize::colorRamp2(c(0, 0.2), c("white","firebrick")), ###modify the figures
+        row_title = NULL,
+        column_title = NULL,
+        row_gap = unit(1, "mm"),
+        column_gap = unit(1, "mm"),
+        na_col = "white",
+        use_raster = T)
+```
+
+
+# A direct comparison between the Cardiomycyte peak sets
+
+<figure class="half">
+    <img src="https://github.com/xsun1229/heart_atlas/raw/master/output/venn_all_ours_paper1.jpg" width="100%">
+</figure>
+
+
