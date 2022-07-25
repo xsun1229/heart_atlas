@@ -13,6 +13,9 @@ suppressMessages(library(ggplot2))
 suppressMessages(library(ComplexHeatmap))
 suppressMessages(library(gridExtra))
 suppressMessages(library(ggvenn))
+suppressMessages(library(GenomicDistributions))
+suppressMessages(library(GenomicDistributionsData))
+
 ```
 
 
@@ -250,3 +253,37 @@ all <- grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]],p[[6]],p[[7]],p[[8]], nro
 
 ```
 
+# Genomic distribution for two datasets
+
+We made Genomic distribution plots for the pairs show correlation in heatmap.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=20}
+
+ocr <- readRDS("/project2/gca/aselewa/heart_atlas_project/ArchR/ArchR_heart_latest_noAtrium/PeakCalls/DA_MARKERS_FDRP_1_log2FC_1.rds")
+ocr_select <- c(1,1,2,3,5,6,7,8)
+celltype_new <- c("Ventricular_cardiomyocyte","Atrial_cardiomyocyte","Endothelial","Fibroblast","Macrophage","Nervous","Smooth_muscle","Smooth_muscle")
+
+folder_out <- "/project2/xinhe/xsun/atlas/cdf_plots/"
+
+p<-list()
+for (i in 1:length(ocr_select)) {
+  
+  dat_our <- ocr[[ocr_select[i]]]
+  extraCols_narrowPeak <- c(signalValue = "numeric", pValue = "numeric",
+                            qValue = "numeric", peak = "integer")
+  dat_new <- import(paste0("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/",celltype_new[i],".narrowPeak.bed"), format = "BED",
+                    extraCols = extraCols_narrowPeak)
+  dat_new <- unique(dat_new)
+  queryList <- GRangesList(dat_new=dat_new, dat_our=dat_our)
+  cal <- calcPartitionsRef(queryList, "hg38")
+  
+  p[[i]] <- plotPartitions(cal) +
+  ggtitle(paste0(names(ocr)[ocr_select[i]],"(ours)","\n and \n ",celltype_new[i], "(new)")) 
+  
+}
+
+all <- grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]],p[[6]],p[[7]],p[[8]], nrow = 2)
+
+
+
+```
