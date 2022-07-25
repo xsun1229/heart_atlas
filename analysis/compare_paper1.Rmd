@@ -164,6 +164,30 @@ all <- grid.arrange(p[[1]],p[[3]],p[[2]],p[[4]], nrow = 2)
 
 ```
 
+Our disjoint CM peaks are a subset of the CM peaks (all)
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=5}
+p<- list()
+
+##########
+ocr_all <- readRDS("/project2/gca/aselewa/heart_atlas_project/ArchR/ArchR_heart_latest_noAtrium/PeakCalls/DA_MARKERS_FDRP_1_log2FC_1.rds")
+dat_our_all <- ocr_all[[1]]
+ocr_disjoint <- readRDS("/project2/gca/aselewa/heart_atlas_project/eQTL_enrich/OCR_disjoint_categories.grlist.rds")
+dat_our_disjoint  <- ocr_disjoint [[1]]
+
+overlap <- findOverlaps(dat_our_all,dat_our_disjoint)
+#overlap <- GenomicRanges::intersect(dat_our_all,dat_our_disjoint)
+num_uniq_all <- length(dat_our_all) - length(overlap)
+
+dat_plot <- list(A = 1:length(dat_our_all), B = (num_uniq_all+1 ): (num_uniq_all + length(dat_our_disjoint) ))  
+names(dat_plot) <- c("CM_allpeak","CM_disjoint")
+p <- ggvenn(dat_plot, fill_alpha = 0) + 
+  ggtitle("Cardiomyocyte(all peaks) \n VS \n Cardiomyocyte (disjoint peaks)") + theme(plot.title = element_text(hjust = 0.5)) 
+p
+```
+
+
+
 
 
 # Peak quality and overlap proportion (for all peaks)
