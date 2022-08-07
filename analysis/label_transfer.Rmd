@@ -1,0 +1,81 @@
+---
+title: "Label transfer (RNA-seq)"
+author: "XSun"
+date: "2022-08-07"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+suppressMessages(library(ComplexHeatmap))
+```
+
+
+# Introduction
+
+We did label transfer for our study and [Litvinukova's study (Cells of the adult human heart)](https://www.nature.com/articles/s41586-020-2797-4).The RNA-seq data for the their study are available [here](https://www.heartcellatlas.org/#DataSources).
+
+Overview of the two datasets:
+
+The new data:
+
+```{r echo=T, eval=FALSE, message=FALSE, warning=FALSE}
+An object of class Seurat 
+33538 features across 486134 samples within 1 assay 
+Active assay: RNA (33538 features, 2000 variable features)
+ 2 dimensional reductions calculated: pca, umap
+```
+
+Our data
+
+```{r echo=T, eval=FALSE, message=FALSE, warning=FALSE}
+An object of class Seurat 
+26537 features across 49359 samples within 1 assay 
+Active assay: RNA (26537 features, 2000 variable features)
+ 3 dimensional reductions calculated: pca, harmony, umap
+```
+
+# Standard workflow of label transfer
+
+We followed the [standard label transfer workflow](https://satijalab.org/seurat/archive/v3.0/integration.html) to do the label transfer. 
+
+We have 49539 cells in total, 48359 of them were annotated same labels. 349 of the not matched cells fell into the "NotAssigned" category which is not included in our dataset. 
+
+## Summary table
+
+The figures in the table shows the number of cells. Rows are from our dataset, columns are from new dataset
+
+```{r echo=F, message=FALSE, warning=FALSE}
+summary<-read.table("/project2/xinhe/xsun/heart_atlas/2.label_transfer/data/summary.txt",header = T)
+colnames(summary)[2] <- "vCardiomyocyte"
+colnames(summary)[9] <- "Smooth Muscle"
+
+rownames(summary) <- c("Cardiomyocyte", "Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Pericyte","Smooth Muscle")
+DT::datatable(summary, options = list(pageLength =10))
+```
+
+## Heatmap
+
+The heatmap shows the proportion of cells have the matched annotations. 
+
+```{r echo=F, message=FALSE, warning=FALSE}
+heat_map<-read.table("/project2/xinhe/xsun/heart_atlas/2.label_transfer/data/heatmap_matrix.txt",header = T)
+#colnames(heat_map)[1] <- "Ventricular Cardiomyocyte"
+colnames(heat_map)[1] <- "vCardiomyocyte"
+colnames(heat_map)[8] <- "Smooth Muscle"
+
+rownames(heat_map) <- c("Cardiomyocyte (8132)", "Endothelial (15336)","Fibroblast (11154)","Lymphoid (1002)","Myeloid (3356)","Neuronal (757)","Pericyte (7099)","Smooth Muscle (1376)")
+
+Heatmap(matrix = heat_map, cluster_rows = F, 
+        cluster_columns = F, show_row_names = T, row_names_side = "left",
+        name = "Proportion \nof matched",
+        col = circlize::colorRamp2(c(0, 0.1), c("white","firebrick")), ###modify the figures
+        row_title = NULL,
+        column_title = NULL,
+        row_gap = unit(1, "mm"),
+        column_gap = unit(1, "mm"),
+        na_col = "white",
+        use_raster = T)
+```
+

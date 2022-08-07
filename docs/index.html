@@ -284,7 +284,7 @@ $(document).ready(function () {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -293,7 +293,7 @@ $(document).ready(function () {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -302,10 +302,10 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-07-22
+<strong>Last updated:</strong> 2022-08-07
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>heart_atlas/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -321,38 +321,39 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you'll want to first commit it to the Git repo. If you're still working on the analysis, you can ignore this warning. When you're finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree0efe457dfb994497fb54442763433f7cabff184atargetblank0efe457a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/xsun1229/heart_atlas/tree/0efe457dfb994497fb54442763433f7cabff184a" target="_blank">0efe457</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree8666f2bc0cd21581eb633fdb1263a4c5d18cb7dftargetblank8666f2ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/xsun1229/heart_atlas/tree/8666f2bc0cd21581eb633fdb1263a4c5d18cb7df" target="_blank">8666f2b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree0efe457dfb994497fb54442763433f7cabff184atargetblank0efe457a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree8666f2bc0cd21581eb633fdb1263a4c5d18cb7dftargetblank8666f2ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/xsun1229/heart_atlas/tree/0efe457dfb994497fb54442763433f7cabff184a" target="_blank">0efe457</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/xsun1229/heart_atlas/tree/8666f2bc0cd21581eb633fdb1263a4c5d18cb7df" target="_blank">8666f2b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
-Ignored files:
-    Ignored:    analysis/test.nb.html
+Untracked files:
+    Untracked:  analysis/label_transfer.Rmd
 
 Unstaged changes:
     Modified:   analysis/compare_paper1.Rmd
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -391,6 +392,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xsun1229/heart_atlas/7a62b4c4e66825b2b6e949bd4ac0645d35ebc84a/docs/index.html" target="_blank">7a62b4c</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-07-22
+</td>
+<td>
+update
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -467,27 +485,15 @@ Start workflowr project.
 </div>
 </div>
 <p>We are trying to To address the reviewers comments for 'Heart-atlas' project here.</p>
-<div id="comments" class="section level1">
-<h1>Comments</h1>
-<p>1a. Compare cell type clusters with two other single-cell chromatin studies in heart tissue ( <a href="https://pubmed.ncbi.nlm.nih.gov/33990324/" class="uri">https://pubmed.ncbi.nlm.nih.gov/33990324/</a> and <a href="https://pubmed.ncbi.nlm.nih.gov/34774128/" class="uri">https://pubmed.ncbi.nlm.nih.gov/34774128/</a> ). The first paper specifically focused on the heart, the second one mapped accessibility across many human tissues.</p>
-<p>1b. Compare OCRs with existing single-cell studies</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Explain why most open chromatin regions (OCRs) with cell-type-specific accessibility are enriched in intronic regions</li>
-</ol>
-</div>
-<div id="approaches" class="section level1">
-<h1>Approaches</h1>
-<p>Compare our data with published snATAC-seq data from the Ren lab (2 different papers).</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>Compare OCRs with existing single-cell studies</p></li>
-<li><p>Obtain the genomic distribution of the cell-type-specific peaks .</p></li>
-</ol>
-</div>
 <div id="results" class="section level1">
 <h1>Results</h1>
-<div id="comparison-with-the-first-dataset" class="section level2">
-<h2>Comparison with the first dataset</h2>
+<div id="comparing-ocr-with-hockers-study" class="section level2">
+<h2>Comparing OCR with Hocker's study</h2>
 <p><a href="https://xsun1229.github.io/heart_atlas/compare_paper1.html">Details</a></p>
+</div>
+<div id="comparing-cell-types-with-litvinukovas-study" class="section level2">
+<h2>Comparing cell types with Litvinukova's study</h2>
+<p><a href="https://xsun1229.github.io/heart_atlas/label_transfer.html">Details</a></p>
 </div>
 </div>
 
