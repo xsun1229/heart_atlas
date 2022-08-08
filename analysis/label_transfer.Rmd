@@ -70,7 +70,7 @@ rownames(heat_map) <- c("Cardiomyocyte (8132)", "Endothelial (15336)","Fibroblas
 Heatmap(matrix = heat_map, cluster_rows = F, 
         cluster_columns = F, show_row_names = T, row_names_side = "left",
         name = "Proportion \nof matched",
-        col = circlize::colorRamp2(c(0, 0.1), c("white","firebrick")), ###modify the figures
+        col = circlize::colorRamp2(c(0, 1), c("white","firebrick")), ###modify the figures
         row_title = NULL,
         column_title = NULL,
         row_gap = unit(1, "mm"),
