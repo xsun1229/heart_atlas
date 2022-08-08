@@ -34,6 +34,10 @@ a. Compare OCRs with existing single-cell studies
 
 b. Obtain the genomic distribution of the cell-type-specific peaks .
 
+# Finalized plots
+
+[link](https://drive.google.com/file/d/1BmwQ1tijgmXOUPuDm08F6DGqDimQUyY9/view?usp=sharing)
+
 # Distribution of peak ranges (all peaks)
 
 The peak ranges of our data were fixed to 501bp.
@@ -41,8 +45,8 @@ The peak ranges of our data were fixed to 501bp.
 The range of the new data set:
 
 ```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=20}
-setwd("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/")
-files <- list.files("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/")
+setwd("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/peakdata_ren/celltype/")
+files <- list.files("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/peakdata_ren/celltype/")
 celltypes <- unlist(strsplit(files,split = ".narrowPeak.bed"))
 extraCols_narrowPeak <- c(signalValue = "numeric", pValue = "numeric",qValue = "numeric", peak = "integer")
 
@@ -77,7 +81,7 @@ genomicCorr.jaccard = function(query, reference) {
 
 This is the heatmap for all peaks. Since the data for Lymphocyte in the new dataset is unavailable, there are just 8 columns in this plot.
 ```{r fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
-load("/project2/xinhe/xsun/atlas/jaccard_heatmap/jcd_matrix_all_uniq.rdata")
+load("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/jaccard_heatmap/jcd_matrix_all_uniq.rdata")
 Heatmap(matrix = jcd_matrix, cluster_rows = F, 
         cluster_columns = F, show_row_names = T, row_names_side = "left",
         name = "Jaccard Index",
@@ -93,7 +97,7 @@ Heatmap(matrix = jcd_matrix, cluster_rows = F,
 
 This is the heatmap for disjoint peaks. 
 ```{r fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
-load("/project2/xinhe/xsun/atlas/jaccard_heatmap/jcd_matrix_disjoint_uniq.rdata")
+load("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/jaccard_heatmap/jcd_matrix_disjoint_uniq.rdata")
 Heatmap(matrix = jcd_matrix, cluster_rows = F, 
         cluster_columns = F, show_row_names = T, row_names_side = "left",
         name = "Jaccard Index",
@@ -117,7 +121,7 @@ ocr <- readRDS("/project2/gca/aselewa/heart_atlas_project/ArchR/ArchR_heart_late
 dat_our <- ocr[[1]]
 extraCols_narrowPeak <- c(signalValue = "numeric", pValue = "numeric",
                           qValue = "numeric", peak = "integer")
-dat_new <- import("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/Atrial_cardiomyocyte.narrowPeak.bed", format = "BED",
+dat_new <- import("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/peakdata_ren/celltype/Atrial_cardiomyocyte.narrowPeak.bed", format = "BED",
                   extraCols = extraCols_narrowPeak)
 dat_new2 <- unique(dat_new)
 
@@ -131,7 +135,7 @@ p[[1]] <- ggvenn(dat_plot, fill_alpha = 0) +
 
 
 ########
-dat_new <- import("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/Ventricular_cardiomyocyte.narrowPeak.bed", format = "BED",
+dat_new <- import("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/peakdata_ren/celltype/Ventricular_cardiomyocyte.narrowPeak.bed", format = "BED",
                   extraCols = extraCols_narrowPeak)
 dat_new2 <- unique(dat_new)
 
@@ -148,7 +152,7 @@ p[[2]] <- ggvenn(dat_plot, fill_alpha = 0) +
 
 ocr <- readRDS("/project2/gca/aselewa/heart_atlas_project/eQTL_enrich/OCR_disjoint_categories.grlist.rds")
 dat_our <- ocr[[1]]
-dat_new <- import("/project2/xinhe/xsun/atlas/peakdata_ren/specific/Atrial_cardiomyocyte.specific.elements.bed")
+dat_new <- import("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/peakdata_ren/specific/Atrial_cardiomyocyte.specific.elements.bed")
 dat_new2 <- unique(dat_new)
 
 overlap <- GenomicRanges::intersect(dat_new2,dat_our)
@@ -161,7 +165,7 @@ p[[3]] <- ggvenn(dat_plot, fill_alpha = 0) +
 
 
 ######
-dat_new <- import("/project2/xinhe/xsun/atlas/peakdata_ren/specific/Ventricular_cardiomyocyte.specific.elements.bed")
+dat_new <- import("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/peakdata_ren/specific/Ventricular_cardiomyocyte.specific.elements.bed")
 dat_new2 <- unique(dat_new)
 
 overlap <- GenomicRanges::intersect(dat_new2,dat_our)
@@ -214,7 +218,7 @@ ocr <- readRDS("/project2/gca/aselewa/heart_atlas_project/ArchR/ArchR_heart_late
 ocr_select <- c(1,1,2,3,5,6,7,8)
 celltype_new <- c("Ventricular_cardiomyocyte","Atrial_cardiomyocyte","Endothelial","Fibroblast","Macrophage","Nervous","Smooth_muscle","Smooth_muscle")
 
-folder_out <- "/project2/xinhe/xsun/atlas/cdf_plots/"
+folder_out <- "/project2/xinhe/xsun/heart_atlas/1.OCR_compare/cdf_plots/"
 
 p <- list()
 for (i in 1:length(ocr_select)) {
@@ -222,7 +226,7 @@ for (i in 1:length(ocr_select)) {
   dat_our <- ocr[[ocr_select[i]]]
   extraCols_narrowPeak <- c(signalValue = "numeric", pValue = "numeric",
                             qValue = "numeric", peak = "integer")
-  dat_new <- import(paste0("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/",celltype_new[i],".narrowPeak.bed"), format = "BED",
+  dat_new <- import(paste0("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/peakdata_ren/celltype/",celltype_new[i],".narrowPeak.bed"), format = "BED",
                     extraCols = extraCols_narrowPeak)
   dat_new <- unique(dat_new)
   
@@ -240,7 +244,7 @@ for (i in 1:length(ocr_select)) {
   df_our_sort$cumsum <- cumsum(df_our_sort$persentage)
   df_our_sort$order <- seq(1:nrow(df_our_sort))
   
-  save(df_our_sort, file = paste0(folder_out,names(ocr)[ocr_select[i]],"_df.rdata")) 
+  #save(df_our_sort, file = paste0(folder_out,names(ocr)[ocr_select[i]],"_df.rdata")) 
   
   p[[i]] <- ggplot(df_our_sort, aes(x=order,y=cumsum)) + 
     theme_bw(base_line_size =0.3) +
@@ -273,7 +277,7 @@ ocr <- readRDS("/project2/gca/aselewa/heart_atlas_project/ArchR/ArchR_heart_late
 ocr_select <- c(1,1,2,3,5,6,7,8)
 celltype_new <- c("Ventricular_cardiomyocyte","Atrial_cardiomyocyte","Endothelial","Fibroblast","Macrophage","Nervous","Smooth_muscle","Smooth_muscle")
 
-folder_out <- "/project2/xinhe/xsun/atlas/cdf_plots/"
+folder_out <- "/project2/xinhe/xsun/heart_atlas/1.OCR_compare/cdf_plots/"
 
 p<-list()
 for (i in 1:length(ocr_select)) {
@@ -281,7 +285,7 @@ for (i in 1:length(ocr_select)) {
   dat_our <- ocr[[ocr_select[i]]]
   extraCols_narrowPeak <- c(signalValue = "numeric", pValue = "numeric",
                             qValue = "numeric", peak = "integer")
-  dat_new <- import(paste0("/project2/xinhe/xsun/atlas/peakdata_ren/celltype/",celltype_new[i],".narrowPeak.bed"), format = "BED",
+  dat_new <- import(paste0("/project2/xinhe/xsun/heart_atlas/1.OCR_compare/peakdata_ren/celltype/",celltype_new[i],".narrowPeak.bed"), format = "BED",
                     extraCols = extraCols_narrowPeak)
   dat_new <- unique(dat_new)
   queryList <- GRangesList(dat_new=dat_new, dat_our=dat_our)
