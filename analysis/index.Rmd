@@ -21,3 +21,8 @@ We are trying to To address the reviewers comments for 'Heart-atlas' project her
 ## Comparing cell types with Litvinukova's study
 
 [Details](https://xsun1229.github.io/heart_atlas/label_transfer.html)
+
+
+## Comparing peaks from ATAC-seq bulk data and cell type specific data. 
+
+[Details](https://xsun1229.github.io/heart_atlas/ATAC_bulk_peak.html)

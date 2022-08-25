@@ -1,0 +1,371 @@
+---
+title: "Peak calling for ATAC-seq bulk data"
+author: "XSun"
+date: "2022-08-17"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+suppressMessages(library(ArchR))
+suppressMessages(library(ggplot2))
+suppressMessages(library(reshape))
+suppressMessages(library(gridExtra))
+suppressMessages(library(genomation))
+```
+
+
+# Introduction
+
+We annotated all cells as the same cluster and did peak calling on the whole data set. 
+
+Then, we compare union set and earlier peaks called on cell-type-specific dataset.
+
+# Peak calling
+
+Same settings with Alan's.
+
+```{r echo=T, eval=FALSE, message=FALSE, warning=FALSE}
+projHeart<- addReproduciblePeakSet(ArchRProj = projHeart, maxPeaks = 500000,groupBy = "CLUSTER_SET", pathToMacs2 = macs2, cutOff = 0.01, verbose = T)
+```
+
+Number of cells: 26,714
+
+Number of used cells: 16,854
+
+203,876 peaks were found. 
+
+# Comparing with earlier peaks
+
+## Comparing with peaks not cell-type-specific 
+
+The peaks for each cell type here are not cell type specific.
+
+```{r echo=F, message=FALSE, warning=FALSE}
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_allpeaks.rdata")
+DT::datatable(summary, options = list(pageLength =10))
+```
+
+The right pannel below shows the proportion of recovered and unrecovered peaks for each cell type.
+
+The left pannel below shows the number of recovered and unrecovered peaks for each cell type.
+
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=20}
+
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_allpeaks.rdata")
+summary$celltype <- rownames(summary)
+
+
+summary1 <- data.frame(cbind(summary$celltype, as.numeric(summary$proportion_peak_overlap), as.numeric(summary$proportion_peak_not_recover)))
+colnames(summary1) <- c("celltype","T","F")
+data_melt <- melt(summary1, id.vars = "celltype")
+data_melt$value <- as.numeric(data_melt$value)
+colnames(data_melt)[2] <- "Recovered"
+
+p1 <- ggplot(data_melt, aes(x=celltype, y=value, fill = Recovered)) +
+  geom_bar(position = "fill", stat = "identity") +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label = paste0(round(value,4)*100,"%")), 
+            position = position_stack(vjust = 0.5), size = 5) +
+  theme_bw(base_line_size =0.3) +
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 18, color = "black", angle = 90, vjust = 0.5, hjust= 1),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 18, color = "black"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 16),
+        title = element_text(size=20)) +
+  labs(x = "Cell types",
+       y = "Proportion") +
+  ggtitle("All peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+summary1 <- data.frame(cbind(summary$celltype, as.numeric(summary$num_peak_overlap), as.numeric(summary$num_peak_celltype) -  as.numeric(summary$num_peak_overlap)))
+colnames(summary1) <- c("celltype","T","F")
+data_melt <- melt(summary1, id.vars = "celltype")
+data_melt$value <- as.numeric(data_melt$value)
+colnames(data_melt)[2] <- "Recovered"
+
+p2 <- ggplot(data_melt, aes(x=celltype, y=value, fill = Recovered)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  geom_text(aes(label = value), 
+            position = position_dodge(width = 0.9), vjust = -0.25, size = 4) +
+  theme_bw(base_line_size =0.3) +
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 18, color = "black", angle = 90, vjust = 0.5, hjust= 1),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 18, color = "black"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 16),
+        title = element_text(size=20)) +
+  labs(x = "Cell types",
+       y = "Number of peaks") +
+  ggtitle("All peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+all <- grid.arrange(p1,p2, nrow = 1)
+```
+
+The plot below shows the relationship between number of peaks for each cell type and the proportion of recovered peaks in bulk data
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=7}
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_allpeaks.rdata")
+summary$celltype <- rownames(summary)
+
+
+p <- ggplot(summary, aes(x=num_peak_celltype, y=proportion_peak_overlap, color=celltype)) +
+  
+  geom_point() + 
+  
+  theme_bw(base_line_size =0.3) +
+  
+  theme(axis.title.x = element_text(size = 12),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.title.y = element_text(size = 12),
+        axis.text.y = element_text(size = 10, color = "black"))+
+  
+  labs(x = "Number of peaks",
+      y = "Proportion of recovered peaks",
+      color = "Cell types")+
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 18, color = "black"),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 18, color = "black"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 16),
+        title = element_text(size=20)) 
+p
+
+```
+
+We also computed odd ratio according to :
+
+
+$$ OR = \frac{\frac{P(OCR_{2}|OCR_{1})}{1-P(OCR_{2}|OCR_{1})}}{\frac{P(OCR_{2}|\overline{OCR_{1}})}{1-P(OCR_{2}|\overline{OCR_{1}})}} $$
+where $OCR_{1}$ is the our bulk peaks and $OCR_{2}$ are peaks for each cell type (not cell type specific). We sampled 2,038,760 (203,876 *10) unoverlapping regions (width = 501 which is the same with our peaks) from whole genome (hg38, blacklist and gaps were excluded) and used these regions as $\overline{OCR_{1}}$ . 
+
+
+```{r echo=F, message=FALSE, warning=FALSE}
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_10times.rdata")
+DT::datatable(OR_final, options = list(pageLength =10))
+```
+
+The plots below shows the distribution of the width of the overlaps. 
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=10}
+
+setwd("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/")
+
+# random_bed <- read.table("random10times.bed")
+# random_bed$V6 <- "."
+# write.table(random_bed, file = "random10times_modify.bed", quote = F, col.names = F, row.names = F,sep = "\t")
+
+gr_random <- readBed("random10times_modify.bed")
+
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/peak_bulk.rdata")
+peak_bulk <- peak_bulk_max
+
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/peak_celltype.rdata")
+peak_celltype_all <- peak
+
+
+#######statistics for overlaps
+overlap1 <- intersect(peak_celltype_all,peak_bulk)
+width <- data.frame(overlap1@ranges@width)
+colnames(width) <- "width"
+
+p1 <- ggplot(width, aes(x=width)) +
+  geom_histogram(binwidth=.5, colour="black", fill="white") +
+  theme(axis.title.x = element_text(size = 22),
+        axis.text.x = element_text(size = 20, color = "black"),
+        axis.title.y = element_text(size = 22),
+        axis.text.y = element_text(size = 20, color = "black")) +
+  
+  theme_bw(base_line_size =0.3) +
+  ggtitle("Width distribution  -- overlaps of peaks \nacross all celltype and bulk peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+overlap2 <- intersect(peak_celltype_all,gr_random)
+width <- data.frame(overlap2@ranges@width)
+colnames(width) <- "width"
+
+p2 <- ggplot(width, aes(x=width)) +
+  geom_histogram(binwidth=.5, colour="black", fill="white") +
+  theme(axis.title.x = element_text(size = 22),
+        axis.text.x = element_text(size = 20, color = "black"),
+        axis.title.y = element_text(size = 22),
+        axis.text.y = element_text(size = 20, color = "black")) +
+  
+  theme_bw(base_line_size =0.3) +
+  ggtitle("Width distribution  -- overlaps of peaks \nacross all celltype and random peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+all <- grid.arrange(p1,p2, nrow = 1)
+
+
+```
+
+
+We also tried to sample random regions with the same size of $OCR_{1}$ and used as $\overline{OCR_{1}}$. The results are similar with earlier ones. 
+
+```{r echo=F, message=FALSE, warning=FALSE}
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_samesize.rdata")
+DT::datatable(OR_final, options = list(pageLength =10))
+```
+
+## Comparing with cell-type-specific peaks
+
+The peaks for each cell type here are cell type specific.
+
+```{r echo=F, message=FALSE, warning=FALSE}
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_celltypespecific.rdata")
+DT::datatable(summary, options = list(pageLength =10))
+```
+
+The right pannel below shows the proportion of recovered and unrecovered peaks for each cell type.
+
+The left pannel below shows the number of recovered and unrecovered peaks for each cell type.
+
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=20}
+
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_celltypespecific.rdata")
+summary$celltype <- rownames(summary)
+summary1 <- data.frame(cbind(summary$celltype, as.numeric(summary$proportion_peak_overlap), as.numeric(summary$proportion_peak_not_recover)))
+colnames(summary1) <- c("celltype","T","F")
+data_melt <- melt(summary1, id.vars = "celltype")
+data_melt$value <- as.numeric(data_melt$value)
+colnames(data_melt)[2] <- "Recovered"
+
+p1 <- ggplot(data_melt, aes(x=celltype, y=value, fill = Recovered)) +
+  geom_bar(position = "fill", stat = "identity") +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label = paste0(round(value,4)*100,"%")), 
+            position = position_stack(vjust = 0.5), size = 5) +
+  theme_bw(base_line_size =0.3) +
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 18, color = "black", angle = 90, vjust = 0.5, hjust= 1),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 18, color = "black"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 16),
+        title = element_text(size=20)) +
+  labs(x = "Cell types",
+       y = "Proportion") +
+  ggtitle("Cell type specific peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_celltypespecific.rdata")
+summary$celltype <- rownames(summary)
+summary1 <- data.frame(cbind(summary$celltype, as.numeric(summary$num_peak_overlap), as.numeric(summary$num_peak_celltype) -  as.numeric(summary$num_peak_overlap)))
+colnames(summary1) <- c("celltype","T","F")
+data_melt <- melt(summary1, id.vars = "celltype")
+data_melt$value <- as.numeric(data_melt$value)
+colnames(data_melt)[2] <- "Recovered"
+
+p2 <- ggplot(data_melt, aes(x=celltype, y=value, fill = Recovered)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  geom_text(aes(label = value), 
+            position = position_dodge(width = 0.9), vjust = -0.25, size = 4) +
+  theme_bw(base_line_size =0.3) +
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 18, color = "black", angle = 90, vjust = 0.5, hjust= 1),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 18, color = "black"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 16),
+        title = element_text(size=20)) +
+  labs(x = "Cell types",
+       y = "Number of peaks") +
+  ggtitle("Cell type specific peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+all <- grid.arrange(p1,p2, nrow = 1)
+```
+
+The plot below shows the relationship between number of peaks for each cell type and the proportion of recovered peaks in bulk data
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=7}
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_celltypespecific.rdata")
+summary$celltype <- rownames(summary)
+
+p <- ggplot(summary, aes(x=num_peak_celltype, y=proportion_peak_overlap, color=celltype)) +
+  
+  geom_point() + 
+  
+  theme_bw(base_line_size =0.3) +
+  
+  theme(axis.title.x = element_text(size = 12),
+        axis.text.x = element_text(size = 10, color = "black"),
+        axis.title.y = element_text(size = 12),
+        axis.text.y = element_text(size = 10, color = "black"))+
+  
+  labs(x = "Number of peaks",
+      y = "Proportion of recovered peaks",
+      color = "Cell types") +
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 18, color = "black"),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 18, color = "black"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 16),
+        title = element_text(size=20)) 
+p
+```
+
+Odd ratio:
+
+```{r echo=F, message=FALSE, warning=FALSE}
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_10times_celltypespecific.rdata")
+DT::datatable(OR_final, options = list(pageLength =10))
+```
+
+The plots below shows the distribution of the width of the overlaps. 
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=10}
+
+peak_list <- readRDS("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/ArchR_Heart_Latest_Backup/PeakCalls/DA_MARKERS_FDRP_1_log2FC_1.rds")
+peak_celltype_all <- peak_list@listData
+
+allpeaks <- c(peak_list[[1]], peak_list[[2]],peak_list[[3]], peak_list[[4]],peak_list[[5]], peak_list[[6]],peak_list[[7]], peak_list[[8]])
+
+overlap1 <- intersect(allpeaks,peak_bulk)
+width <- data.frame(overlap1@ranges@width)
+colnames(width) <- "width"
+
+p1 <- ggplot(width, aes(x=width)) +
+  geom_histogram(binwidth=.5, colour="black", fill="white") +
+  theme(axis.title.x = element_text(size = 22),
+        axis.text.x = element_text(size = 20, color = "black"),
+        axis.title.y = element_text(size = 22),
+        axis.text.y = element_text(size = 20, color = "black")) +
+  
+  theme_bw(base_line_size =0.3) +
+  ggtitle("Width distribution  -- overlaps of peaks \nacross all celltype and bulk peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+overlap2 <- intersect(allpeaks,gr_random)
+width <- data.frame(overlap2@ranges@width)
+colnames(width) <- "width"
+
+p2 <- ggplot(width, aes(x=width)) +
+  geom_histogram(binwidth=.5, colour="black", fill="white") +
+  theme(axis.title.x = element_text(size = 22),
+        axis.text.x = element_text(size = 20, color = "black"),
+        axis.title.y = element_text(size = 22),
+        axis.text.y = element_text(size = 20, color = "black")) +
+  
+  theme_bw(base_line_size =0.3) +
+  ggtitle("Width distribution  -- overlaps of peaks \nacross all celltype and random peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+all <- grid.arrange(p1,p2, nrow = 1)
+
+
+```
+
+
+We also tried to sample random regions with the same size of $OCR_{1}$ and used as $\overline{OCR_{1}}$. The results are similar with earlier ones. 
+
+```{r echo=F, message=FALSE, warning=FALSE}
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_samesize_celltypespecific.rdata")
+DT::datatable(OR_final, options = list(pageLength =10))
+```
