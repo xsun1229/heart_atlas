@@ -139,6 +139,78 @@ p
 
 ```
 
+The plot below shows relationship between peaks recovered and cell type abundance
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=22}
+
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_allpeaks.rdata")
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/celltypes.rdata")
+
+summary$celltype <- rownames(summary)
+
+for (i in 1: nrow(summary)) {
+  
+  summary$number_cell[i] <- sum(celltypes == summary$celltype[i])
+  
+}
+summary$proportion_cell <- summary$number_cell/sum(summary$number_cell)
+
+
+p1 <- ggplot(summary, aes(x=proportion_cell, y=proportion_peak_overlap, color=celltype)) +
+  
+  geom_point(size=10) + 
+  
+  theme_bw(base_line_size =0.3) +
+  
+  theme(axis.title.x = element_text(size = 24),
+        axis.text.x = element_text(size = 22, color = "black"),
+        axis.title.y = element_text(size = 24),
+        axis.text.y = element_text(size = 22, color = "black"))+
+  
+  labs(x = "Proportion of cells",
+       y = "Proportion of recovered peaks",
+       color = "Cell types") +
+  theme(axis.title.x = element_text(size = 24),
+        axis.text.x = element_text(size = 22, color = "black"),
+        axis.title.y = element_text(size = 24),
+        axis.text.y = element_text(size = 24, color = "black"),
+        legend.text = element_text(size = 20),
+        legend.title = element_text(size = 18),
+        title = element_text(size=20))  +
+  ggtitle("Smooth Muscle included") + theme(plot.title = element_text(hjust = 0.5)) 
+
+#### muscle excluded
+
+summary <- summary[!rownames(summary) == "Smooth Muscle",]
+summary$proportion_cell <- summary$number_cell/sum(summary$number_cell)
+
+p2 <- ggplot(summary, aes(x=proportion_cell, y=proportion_peak_overlap, color=celltype)) +
+  
+  geom_point(size=10) + 
+  
+  theme_bw(base_line_size =0.3) +
+  
+  theme(axis.title.x = element_text(size = 24),
+        axis.text.x = element_text(size = 22, color = "black"),
+        axis.title.y = element_text(size = 24),
+        axis.text.y = element_text(size = 22, color = "black"))+
+  
+  labs(x = "Proportion of cells",
+       y = "Proportion of recovered peaks",
+       color = "Cell types") +
+  theme(axis.title.x = element_text(size = 24),
+        axis.text.x = element_text(size = 22, color = "black"),
+        axis.title.y = element_text(size = 24),
+        axis.text.y = element_text(size = 24, color = "black"),
+        legend.text = element_text(size = 20),
+        legend.title = element_text(size = 18),
+        title = element_text(size=20))  +
+  ggtitle("Smooth Muscle excluded") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+all <- grid.arrange(p1,p2, nrow = 1)
+```
+
 We also computed odd ratio according to :
 
 
@@ -312,6 +384,79 @@ p <- ggplot(summary, aes(x=num_peak_celltype, y=proportion_peak_overlap, color=c
         title = element_text(size=20)) 
 p
 ```
+
+The plot below shows relationship between peaks recovered and cell type abundance
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=22}
+
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_celltypespecific.rdata")
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/celltypes.rdata")
+
+summary$celltype <- rownames(summary)
+
+for (i in 1: nrow(summary)) {
+  
+  summary$number_cell[i] <- sum(celltypes == summary$celltype[i])
+  
+}
+summary$proportion_cell <- summary$number_cell/sum(summary$number_cell)
+
+
+p1 <- ggplot(summary, aes(x=proportion_cell, y=proportion_peak_overlap, color=celltype)) +
+  
+  geom_point(size=10) + 
+  
+  theme_bw(base_line_size =0.3) +
+  
+    theme(axis.title.x = element_text(size = 24),
+        axis.text.x = element_text(size = 22, color = "black"),
+        axis.title.y = element_text(size = 24),
+        axis.text.y = element_text(size = 22, color = "black"))+
+  
+  labs(x = "Proportion of cells",
+       y = "Proportion of recovered peaks",
+       color = "Cell types") +
+  theme(axis.title.x = element_text(size = 24),
+        axis.text.x = element_text(size = 22, color = "black"),
+        axis.title.y = element_text(size = 24),
+        axis.text.y = element_text(size = 24, color = "black"),
+        legend.text = element_text(size = 20),
+        legend.title = element_text(size = 18),
+        title = element_text(size=20))  +
+  ggtitle("Smooth Muscle included") + theme(plot.title = element_text(hjust = 0.5)) 
+
+#### muscle excluded
+
+summary <- summary[!rownames(summary) == "Smooth Muscle",]
+summary$proportion_cell <- summary$number_cell/sum(summary$number_cell)
+
+p2 <- ggplot(summary, aes(x=proportion_cell, y=proportion_peak_overlap, color=celltype)) +
+  
+  geom_point(size=10) + 
+  
+  theme_bw(base_line_size =0.3) +
+  
+  theme(axis.title.x = element_text(size = 24),
+        axis.text.x = element_text(size = 22, color = "black"),
+        axis.title.y = element_text(size = 24),
+        axis.text.y = element_text(size = 22, color = "black"))+
+  
+  labs(x = "Proportion of cells",
+       y = "Proportion of recovered peaks",
+       color = "Cell types") +
+  theme(axis.title.x = element_text(size = 24),
+        axis.text.x = element_text(size = 22, color = "black"),
+        axis.title.y = element_text(size = 24),
+        axis.text.y = element_text(size = 24, color = "black"),
+        legend.text = element_text(size = 20),
+        legend.title = element_text(size = 18),
+        title = element_text(size=20))  +
+  ggtitle("Smooth Muscle excluded") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+all <- grid.arrange(p1,p2, nrow = 1)
+```
+
 
 Odd ratio:
 
