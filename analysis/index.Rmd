@@ -8,7 +8,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-We are trying to To address the reviewers comments for 'Heart-atlas' project here. 
+We are trying to To address the reviewers' comments for 'Heart-atlas' project here. 
 
 
 # Results 
