@@ -13,26 +13,26 @@ We are trying to To address the reviewers' comments for 'Heart-atlas' project he
 
 # Results 
 
-## Comparing OCR with Hocker's study
+## 1.Comparing OCR with Hocker's study (7/12)
 
 [Details](https://xsun1229.github.io/heart_atlas/compare_paper1.html)
 
 
-## Comparing cell types with Litvinukova's study
+## 2.Comparing cell types with Litvinukova's study (label transfer, 8/2)
 
 [Details](https://xsun1229.github.io/heart_atlas/label_transfer.html)
 
 
-## Comparing peaks from ATAC-seq bulk data and cell type specific data. 
+## 3.Comparing peaks from ATAC-seq bulk data and cell type specific data (8/17)
 
 [Details](https://xsun1229.github.io/heart_atlas/ATAC_bulk_peak.html)
 
 
-## Comparing DHS, H3K27ac regions and cell type specific peaks. 
+## 4.Comparing DHS, H3K27ac regions and cell type specific peaks (9/9)
 
 [Details](https://xsun1229.github.io/heart_atlas/DHS_bulk_peak.html)
 
 
-## SCAVENGE
+## 5.SCAVENGE (8/25)
 
 [Details](https://xsun1229.github.io/heart_atlas/SCAVENGE.html)

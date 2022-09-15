@@ -292,7 +292,7 @@ $(document).ready(function () {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -303,8 +303,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -317,9 +317,9 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>heart_atlas/</code> <span
@@ -342,33 +342,36 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted
+changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
+<div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and build the
+HTML.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastreebdf99e62a2809e2292aa0fc52ffe9c1ef6c904bbtargetblankbdf99e6a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree54acecef2971d049845b6bcd521088b3c39e5e6ctargetblank54acecea">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/xsun1229/heart_atlas/tree/bdf99e62a2809e2292aa0fc52ffe9c1ef6c904bb" target="_blank">bdf99e6</a>
+<a href="https://github.com/xsun1229/heart_atlas/tree/54acecef2971d049845b6bcd521088b3c39e5e6c" target="_blank">54acece</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastreebdf99e62a2809e2292aa0fc52ffe9c1ef6c904bbtargetblankbdf99e6a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree54acecef2971d049845b6bcd521088b3c39e5e6ctargetblank54acecea"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -378,7 +381,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/xsun1229/heart_atlas/tree/bdf99e62a2809e2292aa0fc52ffe9c1ef6c904bb" target="_blank">bdf99e6</a>.
+<a href="https://github.com/xsun1229/heart_atlas/tree/54acecef2971d049845b6bcd521088b3c39e5e6c" target="_blank">54acece</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -394,6 +397,9 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rhistory
+
+Unstaged changes:
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -438,6 +444,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xsun1229/heart_atlas/54acecef2971d049845b6bcd521088b3c39e5e6c/docs/index.html" target="_blank">54acece</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+<td>
+update
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -704,33 +727,35 @@ Start workflowr project.
 project here.</p>
 <div id="results" class="section level1">
 <h1>Results</h1>
-<div id="comparing-ocr-with-hockers-study" class="section level2">
-<h2>Comparing OCR with Hocker’s study</h2>
+<div id="comparing-ocr-with-hockers-study-712" class="section level2">
+<h2>1.Comparing OCR with Hocker’s study (7/12)</h2>
 <p><a
 href="https://xsun1229.github.io/heart_atlas/compare_paper1.html">Details</a></p>
 </div>
-<div id="comparing-cell-types-with-litvinukovas-study"
+<div id="comparing-cell-types-with-litvinukovas-study-label-transfer-82"
 class="section level2">
-<h2>Comparing cell types with Litvinukova’s study</h2>
+<h2>2.Comparing cell types with Litvinukova’s study (label transfer,
+8/2)</h2>
 <p><a
 href="https://xsun1229.github.io/heart_atlas/label_transfer.html">Details</a></p>
 </div>
 <div
-id="comparing-peaks-from-atac-seq-bulk-data-and-cell-type-specific-data."
+id="comparing-peaks-from-atac-seq-bulk-data-and-cell-type-specific-data-817"
 class="section level2">
-<h2>Comparing peaks from ATAC-seq bulk data and cell type specific
-data.</h2>
+<h2>3.Comparing peaks from ATAC-seq bulk data and cell type specific
+data (8/17)</h2>
 <p><a
 href="https://xsun1229.github.io/heart_atlas/ATAC_bulk_peak.html">Details</a></p>
 </div>
-<div id="comparing-dhs-h3k27ac-regions-and-cell-type-specific-peaks."
+<div id="comparing-dhs-h3k27ac-regions-and-cell-type-specific-peaks-99"
 class="section level2">
-<h2>Comparing DHS, H3K27ac regions and cell type specific peaks.</h2>
+<h2>4.Comparing DHS, H3K27ac regions and cell type specific peaks
+(9/9)</h2>
 <p><a
 href="https://xsun1229.github.io/heart_atlas/DHS_bulk_peak.html">Details</a></p>
 </div>
-<div id="scavenge" class="section level2">
-<h2>SCAVENGE</h2>
+<div id="scavenge-825" class="section level2">
+<h2>5.SCAVENGE (8/25)</h2>
 <p><a
 href="https://xsun1229.github.io/heart_atlas/SCAVENGE.html">Details</a></p>
 </div>
