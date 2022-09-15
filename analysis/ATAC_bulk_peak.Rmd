@@ -215,11 +215,11 @@ We also computed odd ratio according to :
 
 
 $$ OR = \frac{\frac{P(OCR_{2}|OCR_{1})}{1-P(OCR_{2}|OCR_{1})}}{\frac{P(OCR_{2}|\overline{OCR_{1}})}{1-P(OCR_{2}|\overline{OCR_{1}})}} $$
-where $OCR_{1}$ is the our bulk peaks and $OCR_{2}$ are peaks for each cell type (not cell type specific). We sampled 2,038,760 (203,876 *10) unoverlapping regions (width = 501 which is the same with our peaks) from whole genome (hg38, blacklist and gaps were excluded) and used these regions as $\overline{OCR_{1}}$ . 
+where $OCR_{1}$ is the our bulk peaks and $OCR_{2}$ are peaks for each cell type (not cell type specific). We sampled 2,038,760 (203,876 *10) unoverlapping regions (width = 501 which is the same with our peaks) from whole genome (hg38, blacklist, gaps and peaks themselves were excluded) and used these regions as $\overline{OCR_{1}}$ . 
 
 
 ```{r echo=F, message=FALSE, warning=FALSE}
-load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_10times.rdata")
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_10times_peakitself_excluded.rdata")
 DT::datatable(OR_final, options = list(pageLength =10))
 ```
 
@@ -229,11 +229,7 @@ The plots below shows the distribution of the width of the overlaps.
 
 setwd("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/")
 
-# random_bed <- read.table("random10times.bed")
-# random_bed$V6 <- "."
-# write.table(random_bed, file = "random10times_modify.bed", quote = F, col.names = F, row.names = F,sep = "\t")
-
-gr_random <- readBed("random10times_modify.bed")
+gr_random <- readBed("random_peakitself_excluded_10times_shuffled_modify.bed")
 
 load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/peak_bulk.rdata")
 peak_bulk <- peak_bulk_max
@@ -280,7 +276,7 @@ all <- grid.arrange(p1,p2, nrow = 1)
 We also tried to sample random regions with the same size of $OCR_{1}$ and used as $\overline{OCR_{1}}$. The results are similar with earlier ones. 
 
 ```{r echo=F, message=FALSE, warning=FALSE}
-load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_samesize.rdata")
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_samesize_peakitself_excluded.rdata")
 DT::datatable(OR_final, options = list(pageLength =10))
 ```
 
@@ -461,7 +457,7 @@ all <- grid.arrange(p1,p2, nrow = 1)
 Odd ratio:
 
 ```{r echo=F, message=FALSE, warning=FALSE}
-load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_10times_celltypespecific.rdata")
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_10times_celltypespecific_peakitself_excluded.rdata")
 DT::datatable(OR_final, options = list(pageLength =10))
 ```
 
@@ -511,6 +507,6 @@ all <- grid.arrange(p1,p2, nrow = 1)
 We also tried to sample random regions with the same size of $OCR_{1}$ and used as $\overline{OCR_{1}}$. The results are similar with earlier ones. 
 
 ```{r echo=F, message=FALSE, warning=FALSE}
-load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_samesize_celltypespecific.rdata")
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/random_ranges_data/OR_samesize_celltypespecific_peakitself_excluded.rdata")
 DT::datatable(OR_final, options = list(pageLength =10))
 ```
