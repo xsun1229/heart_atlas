@@ -401,7 +401,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-09-15
+<strong>Last updated:</strong> 2022-09-16
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -535,15 +535,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastreed8260fde3c72e4966377e3ca33126e94f485a016targetblankd8260fda">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastreea63947aaec7508e6eac832ea49f3a99ee48890c9targetblanka63947aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/xsun1229/heart_atlas/tree/d8260fde3c72e4966377e3ca33126e94f485a016" target="_blank">d8260fd</a>
+<a href="https://github.com/xsun1229/heart_atlas/tree/a63947aaec7508e6eac832ea49f3a99ee48890c9" target="_blank">a63947a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastreed8260fde3c72e4966377e3ca33126e94f485a016targetblankd8260fda"
+id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastreea63947aaec7508e6eac832ea49f3a99ee48890c9targetblanka63947aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -553,7 +553,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/xsun1229/heart_atlas/tree/d8260fde3c72e4966377e3ca33126e94f485a016" target="_blank">d8260fd</a>.
+<a href="https://github.com/xsun1229/heart_atlas/tree/a63947aaec7508e6eac832ea49f3a99ee48890c9" target="_blank">a63947a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -617,6 +617,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/c24287a7f784fe461f8c1c2512b2c1d9a37693d3/analysis/ATAC_bulk_peak.Rmd" target="_blank">c24287a</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+<td>
+update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xsun1229/heart_atlas/c24287a7f784fe461f8c1c2512b2c1d9a37693d3/docs/ATAC_bulk_peak.html" target="_blank">c24287a</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+<td>
+update
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -692,10 +726,6 @@ update
 </div>
 </div>
 </div>
-<pre><code>Warning: replacing previous import &#39;utils::download.file&#39; by
-&#39;restfulr::download.file&#39; when loading &#39;rtracklayer&#39;</code></pre>
-<pre><code>Warning: replacing previous import &#39;Biostrings::pattern&#39; by &#39;grid::pattern&#39; when
-loading &#39;genomation&#39;</code></pre>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>We annotated all cells as the same cluster and did peak calling on
@@ -720,9 +750,9 @@ class="section level2">
 <div id="htmlwidget-e97637420affa763a688" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-e97637420affa763a688">{"x":{"filter":"none","vertical":false,"data":[["Cardiomyocyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Pericyte","Smooth Muscle"],[112478,53160,80576,11316,46397,11248,34734,2995],[70466,38073,56539,2768,13861,3999,21606,1590],[0.626486957449457,0.716196388261851,0.701685365369341,0.244609402615765,0.298747763864043,0.35552987197724,0.62204180342028,0.530884808013356],[0.373513042550543,0.283803611738149,0.298314634630659,0.755390597384235,0.701252236135957,0.64447012802276,0.37795819657972,0.469115191986644]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>num_peak_celltype<\/th>\n      <th>num_peak_overlap<\/th>\n      <th>proportion_peak_overlap<\/th>\n      <th>proportion_peak_not_recover<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p>The right pannel below shows the proportion of recovered and
-unrecovered peaks for each cell type.</p>
+unrecovered bulk peaks in single cell peaks for each cell type.</p>
 <p>The left pannel below shows the number of recovered and unrecovered
-peaks for each cell type.</p>
+bulk peaks in single cell peaks for each cell type.</p>
 <p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-4-1.png" width="1920" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
@@ -761,8 +791,8 @@ XSun
 </table>
 </div>
 </div>
-<p>The plot below shows the relationship between number of peaks for
-each cell type and the proportion of recovered peaks in bulk data</p>
+<p>The plot below shows the proportion of recovered and unrecovered
+single cell peaks in bulk peaks for each cell type.</p>
 <p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
@@ -801,9 +831,9 @@ XSun
 </table>
 </div>
 </div>
-<p>The plot below shows relationship between peaks recovered and cell
-type abundance</p>
-<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-6-1.png" width="2112" style="display: block; margin: auto;" /></p>
+<p>The plot below shows the relationship between number of peaks for
+each cell type and the proportion of recovered peaks in bulk data</p>
+<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
 Past versions of unnamed-chunk-6-1.png
@@ -841,27 +871,15 @@ XSun
 </table>
 </div>
 </div>
-<p>We also computed odd ratio according to :</p>
-<p><span class="math display">\[ OR =
-\frac{\frac{P(OCR_{2}|OCR_{1})}{1-P(OCR_{2}|OCR_{1})}}{\frac{P(OCR_{2}|\overline{OCR_{1}})}{1-P(OCR_{2}|\overline{OCR_{1}})}}
-\]</span> where <span class="math inline">\(OCR_{1}\)</span> is the our
-bulk peaks and <span class="math inline">\(OCR_{2}\)</span> are peaks
-for each cell type (not cell type specific). We sampled 2,038,760
-(203,876 *10) unoverlapping regions (width = 501 which is the same with
-our peaks) from whole genome (hg38, blacklist, gaps and peaks themselves
-were excluded) and used these regions as <span
-class="math inline">\(\overline{OCR_{1}}\)</span> .</p>
-<div id="htmlwidget-dd8f1e4ab1981104ac71" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dd8f1e4ab1981104ac71">{"x":{"filter":"none","vertical":false,"data":[["Cardiomyocyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Pericyte","Smooth Muscle"],[0.528191290008245,0.22962793194333,0.383739318704738,0.0137637488314736,0.0729468726153198,0.0200073044922627,0.118538431996489,0.00786015838960679],[0.0153136687566297,0.00548817536910051,0.00904585685699904,0.00294573124777398,0.0115445757165,0.00255314796456278,0.00471468214211265,0.000484352280651476],[34.4914924308766,41.8404873204636,42.421555500055,4.67243875077694,6.31871403563676,7.83632784701883,25.1424016346034,16.228184946367],[3.540712697421,3.73386446692745,3.74765661748959,1.54168115181371,1.84351571208091,2.05877033777508,3.22455572901318,2.78674954202359]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>odd1<\/th>\n      <th>odd2<\/th>\n      <th>OR<\/th>\n      <th>logOR<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-<p>The plots below shows the distribution of the width of the
-overlaps.</p>
-<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>The plot below shows relationship between peaks recovered and cell
+type abundance</p>
+<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-7-1.png" width="2112" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
-Past versions of unnamed-chunk-8-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div id="fig-unnamed-chunk-7-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -880,18 +898,59 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/xsun1229/heart_atlas/blob/3ed1b34882babb6c2ef0320816257669764f1e1f/docs/figure/ATAC_bulk_peak.Rmd/unnamed-chunk-8-1.png" target="_blank">3ed1b34</a>
+<a href="https://github.com/xsun1229/heart_atlas/blob/b4734b5b11ff9c0c90c3abbcf6bed39be23dd1ef/docs/figure/ATAC_bulk_peak.Rmd/unnamed-chunk-7-1.png" target="_blank">b4734b5</a>
 </td>
 <td>
 XSun
 </td>
 <td>
-2022-08-26
+2022-08-25
 </td>
 </tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We also computed odd ratio according to :</p>
+<p><span class="math display">\[ OR =
+\frac{\frac{P(OCR_{2}|OCR_{1})}{1-P(OCR_{2}|OCR_{1})}}{\frac{P(OCR_{2}|\overline{OCR_{1}})}{1-P(OCR_{2}|\overline{OCR_{1}})}}
+\]</span> where <span class="math inline">\(OCR_{1}\)</span> is the our
+bulk peaks and <span class="math inline">\(OCR_{2}\)</span> are peaks
+for each cell type (not cell type specific). We sampled 2,038,760
+(203,876 *10) unoverlapping regions (width = 501 which is the same with
+our peaks) from whole genome (hg38, blacklist, gaps and peaks themselves
+were excluded) and used these regions as <span
+class="math inline">\(\overline{OCR_{1}}\)</span> .</p>
+<div id="htmlwidget-dd8f1e4ab1981104ac71" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dd8f1e4ab1981104ac71">{"x":{"filter":"none","vertical":false,"data":[["Cardiomyocyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Pericyte","Smooth Muscle"],[0.528191290008245,0.22962793194333,0.383739318704738,0.0137637488314736,0.0729468726153198,0.0200073044922627,0.118538431996489,0.00786015838960679],[0.0153136687566297,0.00548817536910051,0.00904585685699904,0.00294573124777398,0.0115445757165,0.00255314796456278,0.00471468214211265,0.000484352280651476],[34.4914924308766,41.8404873204636,42.421555500055,4.67243875077694,6.31871403563676,7.83632784701883,25.1424016346034,16.228184946367],[3.540712697421,3.73386446692745,3.74765661748959,1.54168115181371,1.84351571208091,2.05877033777508,3.22455572901318,2.78674954202359]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>odd1<\/th>\n      <th>odd2<\/th>\n      <th>OR<\/th>\n      <th>logOR<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p>The plots below shows the distribution of the width of the
+overlaps.</p>
+<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>
-<a href="https://github.com/xsun1229/heart_atlas/blob/b4734b5b11ff9c0c90c3abbcf6bed39be23dd1ef/docs/figure/ATAC_bulk_peak.Rmd/unnamed-chunk-8-1.png" target="_blank">b4734b5</a>
+<a href="https://github.com/xsun1229/heart_atlas/blob/b4734b5b11ff9c0c90c3abbcf6bed39be23dd1ef/docs/figure/ATAC_bulk_peak.Rmd/unnamed-chunk-9-1.png" target="_blank">b4734b5</a>
 </td>
 <td>
 XSun
@@ -921,58 +980,7 @@ class="section level2">
 unrecovered peaks for each cell type.</p>
 <p>The left pannel below shows the number of recovered and unrecovered
 peaks for each cell type.</p>
-<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-11-1.png" width="1920" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
-Past versions of unnamed-chunk-11-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-11-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/xsun1229/heart_atlas/blob/3ed1b34882babb6c2ef0320816257669764f1e1f/docs/figure/ATAC_bulk_peak.Rmd/unnamed-chunk-11-1.png" target="_blank">3ed1b34</a>
-</td>
-<td>
-XSun
-</td>
-<td>
-2022-08-26
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/xsun1229/heart_atlas/blob/b4734b5b11ff9c0c90c3abbcf6bed39be23dd1ef/docs/figure/ATAC_bulk_peak.Rmd/unnamed-chunk-11-1.png" target="_blank">b4734b5</a>
-</td>
-<td>
-XSun
-</td>
-<td>
-2022-08-25
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>The plot below shows the relationship between number of peaks for
-each cell type and the proportion of recovered peaks in bulk data</p>
-<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-12-1.png" width="1920" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
 Past versions of unnamed-chunk-12-1.png
@@ -1010,9 +1018,9 @@ XSun
 </table>
 </div>
 </div>
-<p>The plot below shows relationship between peaks recovered and cell
-type abundance</p>
-<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-13-1.png" width="2112" style="display: block; margin: auto;" /></p>
+<p>The plot below shows the proportion of recovered and unrecovered
+single cell peaks in bulk peaks for each cell type.</p>
+<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
 Past versions of unnamed-chunk-13-1.png
@@ -1061,12 +1069,12 @@ XSun
 </table>
 </div>
 </div>
-<p>Odd ratio:</p>
-<div id="htmlwidget-f51dfbe80cfd47863195" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f51dfbe80cfd47863195">{"x":{"filter":"none","vertical":false,"data":[["Cardiomyocyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Pericyte","Smooth Muscle"],[0.239767219833746,0.109885623138858,0.159994537882064,0.0184023337595908,0.0659514174274032,0.0210698706359024,0.0790172853619553,0.00933709589583643],[0.00796778869637959,0.000721546760647723,0.0022426528784317,0.00214510842530166,0.0075274471121724,0.00117955683627339,0.00122429917098298,0.000167286509790185],[30.0920655617651,152.291755894262,71.3416415981189,8.57874294023292,8.76145875814328,17.8625310692694,64.5408305704503,55.8149961257918],[3.40426153440639,5.02579812773515,4.26748019057319,2.1492873923038,2.17036241598677,2.88270528261175,4.16729805562143,4.0220425810551]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>odd1<\/th>\n      <th>odd2<\/th>\n      <th>OR<\/th>\n      <th>logOR<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-<p>The plots below shows the distribution of the width of the
-overlaps.</p>
-<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-15-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>The plot below shows the relationship between number of peaks for
+each cell type and the proportion of recovered peaks in bulk data</p>
+<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The plot below shows relationship between peaks recovered and cell
+type abundance</p>
+<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-15-1.png" width="2112" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
 Past versions of unnamed-chunk-15-1.png
@@ -1091,6 +1099,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/c24287a7f784fe461f8c1c2512b2c1d9a37693d3/docs/figure/ATAC_bulk_peak.Rmd/unnamed-chunk-15-1.png" target="_blank">c24287a</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/xsun1229/heart_atlas/blob/3ed1b34882babb6c2ef0320816257669764f1e1f/docs/figure/ATAC_bulk_peak.Rmd/unnamed-chunk-15-1.png" target="_blank">3ed1b34</a>
 </td>
 <td>
@@ -1104,6 +1123,12 @@ XSun
 </table>
 </div>
 </div>
+<p>Odd ratio:</p>
+<div id="htmlwidget-f51dfbe80cfd47863195" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f51dfbe80cfd47863195">{"x":{"filter":"none","vertical":false,"data":[["Cardiomyocyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Pericyte","Smooth Muscle"],[0.239767219833746,0.109885623138858,0.159994537882064,0.0184023337595908,0.0659514174274032,0.0210698706359024,0.0790172853619553,0.00933709589583643],[0.00796778869637959,0.000721546760647723,0.0022426528784317,0.00214510842530166,0.0075274471121724,0.00117955683627339,0.00122429917098298,0.000167286509790185],[30.0920655617651,152.291755894262,71.3416415981189,8.57874294023292,8.76145875814328,17.8625310692694,64.5408305704503,55.8149961257918],[3.40426153440639,5.02579812773515,4.26748019057319,2.1492873923038,2.17036241598677,2.88270528261175,4.16729805562143,4.0220425810551]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>odd1<\/th>\n      <th>odd2<\/th>\n      <th>OR<\/th>\n      <th>logOR<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p>The plots below shows the distribution of the width of the
+overlaps.</p>
+<p><img src="figure/ATAC_bulk_peak.Rmd/unnamed-chunk-17-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>We also tried to sample random regions with the same size of <span
 class="math inline">\(OCR_{1}\)</span> and used as <span
 class="math inline">\(\overline{OCR_{1}}\)</span>. The results are

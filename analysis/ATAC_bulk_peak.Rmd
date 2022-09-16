@@ -7,7 +7,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
 suppressMessages(library(ArchR))
 suppressMessages(library(ggplot2))
 suppressMessages(library(reshape))
@@ -47,9 +47,9 @@ load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_allpeaks.rdata")
 DT::datatable(summary, options = list(pageLength =10))
 ```
 
-The right pannel below shows the proportion of recovered and unrecovered peaks for each cell type.
+The right pannel below shows the proportion of recovered and unrecovered bulk peaks in single cell peaks for each cell type.
 
-The left pannel below shows the number of recovered and unrecovered peaks for each cell type.
+The left pannel below shows the number of recovered and unrecovered bulk peaks in single cell peaks for each cell type.
 
 
 ```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=10, fig.width=20}
@@ -105,6 +105,41 @@ p2 <- ggplot(data_melt, aes(x=celltype, y=value, fill = Recovered)) +
 
 
 all <- grid.arrange(p1,p2, nrow = 1)
+```
+
+
+The plot below shows the proportion of recovered and unrecovered single cell peaks in bulk peaks for each cell type.
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=7, fig.width=7}
+
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_allpeaks_singlecell_recovered_by_bulk.rdata")
+summary$celltype <- rownames(summary)
+
+
+summary1 <- data.frame(cbind(summary$celltype, as.numeric(summary$proportion_peak_overlap), as.numeric(summary$proportion_peak_not_recover)))
+colnames(summary1) <- c("celltype","T","F")
+data_melt <- melt(summary1, id.vars = "celltype")
+data_melt$value <- as.numeric(data_melt$value)
+colnames(data_melt)[2] <- "Recovered"
+
+ggplot(data_melt, aes(x=celltype, y=value, fill = Recovered)) +
+  geom_bar(position = "fill", stat = "identity") +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label = paste0(round(value,4)*100,"%")), 
+            position = position_stack(vjust = 0.5), size = 4) +
+  theme_bw(base_line_size =0.3) +
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 18, color = "black", angle = 90, vjust = 0.5, hjust= 1),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 18, color = "black"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 16),
+        title = element_text(size=20)) +
+  labs(x = "Cell types",
+       y = "Proportion") +
+  ggtitle("All peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
 ```
 
 The plot below shows the relationship between number of peaks for each cell type and the proportion of recovered peaks in bulk data
@@ -351,6 +386,40 @@ p2 <- ggplot(data_melt, aes(x=celltype, y=value, fill = Recovered)) +
 all <- grid.arrange(p1,p2, nrow = 1)
 ```
 
+The plot below shows the proportion of recovered and unrecovered single cell peaks in bulk peaks for each cell type.
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=7, fig.width=7}
+
+load("/project2/xinhe/xsun/heart_atlas/3.ATAC_peak/peak/summary_celltypespecific_singlecell_recovered_by_bulk.rdata")
+summary$celltype <- rownames(summary)
+
+
+summary1 <- data.frame(cbind(summary$celltype, as.numeric(summary$proportion_peak_overlap), as.numeric(summary$proportion_peak_not_recover)))
+colnames(summary1) <- c("celltype","T","F")
+data_melt <- melt(summary1, id.vars = "celltype")
+data_melt$value <- as.numeric(data_melt$value)
+colnames(data_melt)[2] <- "Recovered"
+
+ggplot(data_melt, aes(x=celltype, y=value, fill = Recovered)) +
+  geom_bar(position = "fill", stat = "identity") +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label = paste0(round(value,4)*100,"%")), 
+            position = position_stack(vjust = 0.5), size = 4) +
+  theme_bw(base_line_size =0.3) +
+  theme(axis.title.x = element_text(size = 20),
+        axis.text.x = element_text(size = 18, color = "black", angle = 90, vjust = 0.5, hjust= 1),
+        axis.title.y = element_text(size = 20),
+        axis.text.y = element_text(size = 18, color = "black"),
+        legend.text = element_text(size = 14),
+        legend.title = element_text(size = 16),
+        title = element_text(size=20)) +
+  labs(x = "Cell types",
+       y = "Proportion") +
+  ggtitle("All peaks") + theme(plot.title = element_text(hjust = 0.5)) 
+
+
+```
+
 The plot below shows the relationship between number of peaks for each cell type and the proportion of recovered peaks in bulk data
 
 ```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=7}
@@ -452,6 +521,7 @@ p2 <- ggplot(summary, aes(x=proportion_cell, y=proportion_peak_overlap, color=ce
 
 all <- grid.arrange(p1,p2, nrow = 1)
 ```
+
 
 
 Odd ratio:
