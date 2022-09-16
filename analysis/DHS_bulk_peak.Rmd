@@ -46,7 +46,7 @@ ggClean <- function(rotate_axis=FALSE){
 ```
 
 
-## Introduction
+# Introduction
 
 We will try to address the 3rd comments from the 3rd reviewer here: 
 
@@ -57,13 +57,140 @@ We computed odd ratios according to:
 $$ OR = \frac{\frac{P(OCR_{2}|OCR_{1})}{1-P(OCR_{2}|OCR_{1})}}{\frac{P(OCR_{2}|\overline{OCR_{1}})}{1-P(OCR_{2}|\overline{OCR_{1}})}} $$
 where $OCR_{1}$ is the bulk peaks from DHS, H3K27ac regions and $OCR_{2}$ are peaks for each cell type specific OCR peaks. We permuted $OCR_{1}$ among whole genome (hg38,$OCR_{1}$ themselves were excluded) and used these regions as $\overline{OCR_{1}}$ . 
 
-The permutation were performed using bedtools under two settings: 1) permuted 10 times the $OCR_{1}$ 2) permuted same size of $OCR_{1}$.
+The permutation were performed using bedtools under three settings: 1)permuted $OCR_{1}$ and repeated the permutation 10 times 2) permuted 10 times the size of $OCR_{1}$ 3) permuted same size of $OCR_{1}$.
 
-The H3K27ac regions covers 1/16 of the whole genome, bedtools cannot handle permutation for the data 10 times of it. So the permutation for H3K27ac region was just performed under the second setting. 
+The H3K27ac regions covers 1/16 of the whole genome, bedtools cannot handle permutation for the data 10 times of it. So the permutation for H3K27ac region was not performed under the second setting. 
 
 For DHS peaks, the OR results were not differ a lot under different settings. 
 
-# Results for 10 times permutation 
+# Results for same size of permutation, repeated 10 times
+
+The workflow:
+
+1. We shuffled $OCR_{1}$ on the whole genome with the options below:
+
+-excl: to exclude the original peaks
+-seed: to make sure the analyses are reproducible
+-noOverlapping: to make sure the random ranges are not overlap with each other
+
+2. We did the shuffling 10 times, recorded the overlaps with our OCR peaks, then use the average value from the 10 times for to compute odd ratios.
+
+In this case, we did not care about overlaps across the shuffled datasets.
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=6}
+
+odd_all <- c()
+for (i in 1:length(encode.beds)) {
+  
+  gr_bulk <- encode.beds[[i]]
+  
+  odd1 <- c()
+  odd2 <- c()
+  for (j in 1:length(markers)) {
+    gr_celltype <- markers[[j]]
+    
+    hit_overlap_with_bulk <- subsetByOverlapProp(q = gr_celltype, s = gr_bulk, minPoverlap = 0.1)
+    overlap_with_bulk <- gr_celltype[unique(queryHits(hit_overlap_with_bulk)),]
+    
+    ### count length of overlap for each random data set
+    overlap_with_random_tmp <- c()
+    for (t in 1:10) {
+      gr_random <- readBed(paste0("/project2/xinhe/xsun/heart_atlas/5.OR/data/data_shuffled_samesize_10times_exclude_itself/",names(encode.beds)[i],"_",t,"_shuffled.bed" ))
+  
+      hit_overlap_with_random <- subsetByOverlapProp(q = gr_celltype, s = gr_random, minPoverlap = 0.1)
+      overlap_with_random_tmp[t] <- length(gr_celltype[unique(queryHits(hit_overlap_with_random)),])
+      
+    }
+    
+    overlap_with_random <- mean(overlap_with_random_tmp) ###length
+    odd1[j] <- (length(overlap_with_bulk) / length(gr_bulk)) / ( 1- (length(overlap_with_bulk) / length(gr_bulk)))
+    odd2[j] <- (overlap_with_random  / length(gr_random))  / (1 - (overlap_with_random  / length(gr_random))) 
+    
+  }
+  odd <- odd1/odd2
+  odd_all <- rbind(odd_all,odd)
+    
+}
+
+
+colnames(odd_all) <- names(markers)
+rownames(odd_all) <- names(encode.beds)
+
+odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Smooth Muscle")]
+#odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid")]
+odd_heatmap <- odd_re[c("Heart_RVLV","DermisEndothelialBlood","Tcell","Bcell","CD14Monocyte"),]
+
+rownames(odd_heatmap) <- c("Heart \nLV+RV","Dermis \nEndothelial","T cell","B cell","CD14+ \nMonocyte")
+colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye","Neuro","SMuscle")
+#colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye")
+
+DT::datatable(odd_heatmap, options = list(pageLength =10))
+
+Heatmap(matrix = odd_heatmap, cluster_rows = F, 
+        cluster_columns = F, show_row_names = T, row_names_side = "left",
+        name = "Odd Ratio",
+        col = circlize::colorRamp2(c(0,8,60), c("lightblue","white","firebrick")), 
+        row_title = "ENCODE DNase",
+        column_title = "Cell Types",
+        row_gap = unit(1, "mm"),
+        column_gap = unit(1, "mm"),
+        na_col = "white",
+        rect_gp = gpar(col = "black", lwd = 0.5),
+        use_raster = F)
+
+odd_log <- log(odd_heatmap)
+Heatmap(matrix = odd_log, cluster_rows = F, 
+        cluster_columns = F, show_row_names = T, row_names_side = "left",
+        name = "log(OR)",
+        col = circlize::colorRamp2(c(0,2,4.1), c("lightblue","white","firebrick")), 
+        row_title = "ENCODE DNase",
+        column_title = "Cell Types",
+        row_gap = unit(1, "mm"),
+        column_gap = unit(1, "mm"),
+        na_col = "white",
+        rect_gp = gpar(col = "black", lwd = 0.5),
+        use_raster = F)
+```
+
+
+
+```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=5}
+
+odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Smooth Muscle")]
+odd_h3k <- data.frame(odd_re["Heart_LVRV",])
+odd_h3k <- cbind(rownames(odd_h3k),odd_h3k)
+colnames(odd_h3k) <- c("celltypes","Odd_ratio")
+odd_h3k$celltypes <- c("CM","Peri","Endo","Fibro","Lymph", "Mye","Neuro","SMuscle")
+odd_h3k$celltypes <- factor(odd_h3k$celltypes,levels = odd_h3k$celltypes)
+
+DT::datatable(t(odd_h3k), options = list(pageLength =10))
+
+ggplot(odd_h3k, aes(x=celltypes, y=Odd_ratio)) + 
+  geom_bar(stat='identity', width=0.7) + 
+  ggClean(rotate_axis = T) + 
+  ylab('Odd Ratio') + 
+  xlab('')
+
+odd_h3k$Odd_ratio <- log(odd_h3k$Odd_ratio)
+ggplot(odd_h3k, aes(x=celltypes, y=Odd_ratio)) + 
+  geom_bar(stat='identity', width=0.7) + 
+  ggClean(rotate_axis = T) + 
+  ylab('log(OR)') + 
+  xlab('')
+
+```
+
+# Results for 10 times the size of $OCR_{1}$ permutation 
+
+The permutation workflow: 
+
+1. shifted the original peaks 9 times, 100bp one time, to get a dataset (datasetA) that 10 times as the original peak.
+2. permuted  datasetA using shuffle from bedtools to get random ranges working as $\overline{OCR_{1}}$ . When doing shuffling, we used several options:
+-excl: to exclude the original peaks
+-seed: to make sure the analyses are reproducible
+-noOverlapping: to make sure the random ranges are not overlap with each other
+
+We did 1 since ‘shuffle’ do not have an option allowing us to shuffle 10 times, if I used the shuffle command 10 times, the random ranges will overlap each other since the ‘-noOverlapping’ only guarantee not overlapping within one command. 
 
 
 ```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=6}
@@ -98,11 +225,15 @@ for (i in 1:length(encode.beds)) {
 colnames(odd_all) <- names(markers)
 rownames(odd_all) <- names(encode.beds)
 
-odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid")]
+
+odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Smooth Muscle")]
+#odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid")]
 odd_heatmap <- odd_re[c("Heart_RVLV","DermisEndothelialBlood","Tcell","Bcell","CD14Monocyte"),]
 
 rownames(odd_heatmap) <- c("Heart \nLV+RV","Dermis \nEndothelial","T cell","B cell","CD14+ \nMonocyte")
-colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye")
+colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye","Neuro","SMuscle")
+#colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye")
+
 
 DT::datatable(odd_heatmap, options = list(pageLength =10))
 
@@ -169,11 +300,13 @@ for (i in 1:length(encode.beds)) {
 colnames(odd_all) <- names(markers)
 rownames(odd_all) <- names(encode.beds)
 
-odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid")]
+odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Smooth Muscle")]
+#odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid")]
 odd_heatmap <- odd_re[c("Heart_RVLV","DermisEndothelialBlood","Tcell","Bcell","CD14Monocyte"),]
 
 rownames(odd_heatmap) <- c("Heart \nLV+RV","Dermis \nEndothelial","T cell","B cell","CD14+ \nMonocyte")
-colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye")
+colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye","Neuro","SMuscle")
+#colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye")
 
 DT::datatable(odd_heatmap, options = list(pageLength =10))
 
@@ -205,12 +338,15 @@ Heatmap(matrix = odd_log, cluster_rows = F,
 ```
 
 ```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=5}
+
+odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Smooth Muscle")]
 odd_h3k <- data.frame(odd_re["Heart_LVRV",])
 odd_h3k <- cbind(rownames(odd_h3k),odd_h3k)
 colnames(odd_h3k) <- c("celltypes","Odd_ratio")
-odd_h3k$celltypes <- c("CM","Peri","Endo","Fibro","Lymph", "Mye")
+odd_h3k$celltypes <- c("CM","Peri","Endo","Fibro","Lymph", "Mye","Neuro","SMuscle")
 odd_h3k$celltypes <- factor(odd_h3k$celltypes,levels = odd_h3k$celltypes)
 
+DT::datatable(t(odd_h3k), options = list(pageLength =10))
 
 ggplot(odd_h3k, aes(x=celltypes, y=Odd_ratio)) + 
   geom_bar(stat='identity', width=0.7) + 

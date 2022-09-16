@@ -402,7 +402,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-09-15
+<strong>Last updated:</strong> 2022-09-16
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -440,10 +440,10 @@ changes </a>
 <div id="strongRMarkdownfilestronguncommittedchanges"
 class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown is untracked by Git. To know which version of the R
-Markdown file created these results, you’ll want to first commit it to
-the Git repo. If you’re still working on the analysis, you can ignore
-this warning. When you’re finished, you can run
+<p>The R Markdown file has unstaged changes. To know which version of
+the R Markdown file created these results, you’ll want to first commit
+it to the Git repo. If you’re still working on the analysis, you can
+ignore this warning. When you’re finished, you can run
 <code>wflow_publish</code> to commit the R Markdown file and build the
 HTML.</p>
 </div>
@@ -536,15 +536,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree78a0f42f7d6b140388021eeec5ce9c7afcc13bb5targetblank78a0f42a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastreec24287a7f784fe461f8c1c2512b2c1d9a37693d3targetblankc24287aa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/xsun1229/heart_atlas/tree/78a0f42f7d6b140388021eeec5ce9c7afcc13bb5" target="_blank">78a0f42</a>
+<a href="https://github.com/xsun1229/heart_atlas/tree/c24287a7f784fe461f8c1c2512b2c1d9a37693d3" target="_blank">c24287a</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastree78a0f42f7d6b140388021eeec5ce9c7afcc13bb5targetblank78a0f42a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomxsun1229heartatlastreec24287a7f784fe461f8c1c2512b2c1d9a37693d3targetblankc24287aa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -554,7 +554,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/xsun1229/heart_atlas/tree/78a0f42f7d6b140388021eeec5ce9c7afcc13bb5" target="_blank">78a0f42</a>.
+<a href="https://github.com/xsun1229/heart_atlas/tree/c24287a7f784fe461f8c1c2512b2c1d9a37693d3" target="_blank">c24287a</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -571,11 +571,8 @@ were generated:
 Ignored files:
     Ignored:    .Rhistory
 
-Untracked files:
-    Untracked:  analysis/DHS_bulk_peak.Rmd
-
 Unstaged changes:
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/DHS_bulk_peak.Rmd
 
 </code></pre>
 <p>
@@ -590,16 +587,80 @@ have uncommitted changes.
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with
-<code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/DHS_bulk_peak.Rmd</code>) and
+HTML (<code>docs/DHS_bulk_peak.html</code>) files. If you’ve configured
+a remote Git repository (see <code>?wflow_git_remote</code>), click on
+the hyperlinks in the table below to view the files as they were in that
+past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/bdf99e62a2809e2292aa0fc52ffe9c1ef6c904bb/analysis/DHS_bulk_peak.Rmd" target="_blank">bdf99e6</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+<td>
+update
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xsun1229/heart_atlas/bdf99e62a2809e2292aa0fc52ffe9c1ef6c904bb/docs/DHS_bulk_peak.html" target="_blank">bdf99e6</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+<td>
+update
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
 </div>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
 <p>We will try to address the 3rd comments from the 3rd reviewer
 here:</p>
 <p>Given that the numbers of cell type-specific peaks across different
@@ -619,27 +680,261 @@ class="math inline">\(OCR_{1}\)</span> among whole genome (hg38,<span
 class="math inline">\(OCR_{1}\)</span> themselves were excluded) and
 used these regions as <span
 class="math inline">\(\overline{OCR_{1}}\)</span> .</p>
-<p>The permutation were performed using bedtools under two settings: 1)
-permuted 10 times the <span class="math inline">\(OCR_{1}\)</span> 2)
-permuted same size of <span class="math inline">\(OCR_{1}\)</span>.</p>
+<p>The permutation were performed using bedtools under three settings:
+1)permuted <span class="math inline">\(OCR_{1}\)</span> and repeated the
+permutation 10 times 2) permuted 10 times the size of <span
+class="math inline">\(OCR_{1}\)</span> 3) permuted same size of <span
+class="math inline">\(OCR_{1}\)</span>.</p>
 <p>The H3K27ac regions covers 1/16 of the whole genome, bedtools cannot
 handle permutation for the data 10 times of it. So the permutation for
-H3K27ac region was just performed under the second setting.</p>
+H3K27ac region was not performed under the second setting.</p>
 <p>For DHS peaks, the OR results were not differ a lot under different
 settings.</p>
 </div>
-<div id="results-for-10-times-permutation" class="section level1">
-<h1>Results for 10 times permutation</h1>
+<div id="results-for-same-size-of-permutation-repeated-10-times"
+class="section level1">
+<h1>Results for same size of permutation, repeated 10 times</h1>
+<p>The workflow:</p>
+<ol style="list-style-type: decimal">
+<li>We shuffled <span class="math inline">\(OCR_{1}\)</span> on the
+whole genome with the options below:</li>
+</ol>
+<p>-excl: to exclude the original peaks -seed: to make sure the analyses
+are reproducible -noOverlapping: to make sure the random ranges are not
+overlap with each other</p>
+<ol start="2" style="list-style-type: decimal">
+<li>We did the shuffling 10 times, recorded the overlaps with our OCR
+peaks, then use the average value from the 10 times for to compute odd
+ratios.</li>
+</ol>
+<p>In this case, we did not care about overlaps across the shuffled
+datasets.</p>
 <div id="htmlwidget-e97637420affa763a688" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e97637420affa763a688">{"x":{"filter":"none","vertical":false,"data":[["Heart \nLV+RV","Dermis \nEndothelial","T cell","B cell","CD14+ \nMonocyte"],[15.0790393993827,7.4970231977687,5.92094631444269,5.01310587756487,4.1749393799692],[12.7437110095507,9.63163048152785,3.92500401044919,4.30147266931318,4.29604845358861],[14.0796477767971,36.5913898290704,10.1611162325868,7.41182023758214,8.39911226424603],[11.6846618001176,9.63997974605362,3.4159511712617,3.22431865828092,5.22531754985567],[6.93324375699111,12.6164470391722,61.4720488683167,37.9602976191206,21.8146919700743],[6.56523161054687,9.93963775769155,8.43903512550007,15.2130141831819,29.9493909674908]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>CM<\/th>\n      <th>Peri<\/th>\n      <th>Endo<\/th>\n      <th>Fibro<\/th>\n      <th>Lymph<\/th>\n      <th>Mye<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-2-2.png" width="576" style="display: block; margin: auto;" /><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-2-3.png" width="576" style="display: block; margin: auto;" /></p>
+<script type="application/json" data-for="htmlwidget-e97637420affa763a688">{"x":{"filter":"none","vertical":false,"data":[["Heart \nLV+RV","Dermis \nEndothelial","T cell","B cell","CD14+ \nMonocyte"],[14.0696430590797,6.92355483817675,5.94345189707007,4.94501163871611,4.05566402036069],[11.6594058746917,8.94966764489353,4.030889349703,4.22753277280687,4.21644321345025],[12.8822663939013,34.5668852238218,9.28706973764131,7.03824384659439,7.85370145423326],[10.7195277049252,8.84693310560021,3.49637655805325,3.14299502280426,5.04020198537146],[6.5364127511446,11.9856394076978,58.8608268865541,38.3768528770017,21.4219404026667],[6.06507338937619,9.25806799641392,8.463868386473,14.9561347166254,29.4560275868098],[8.31743024101623,9.89965342685487,5.20946629760979,4.25064898890769,5.98455342807002],[21.903096829102,11.2820415238248,3.98825204161961,4.82254794947762,7.39255042172781]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>CM<\/th>\n      <th>Peri<\/th>\n      <th>Endo<\/th>\n      <th>Fibro<\/th>\n      <th>Lymph<\/th>\n      <th>Mye<\/th>\n      <th>Neuro<\/th>\n      <th>SMuscle<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-2-2.png" width="576" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-2">
+Past versions of unnamed-chunk-2-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/bdf99e62a2809e2292aa0fc52ffe9c1ef6c904bb/docs/figure/DHS_bulk_peak.Rmd/unnamed-chunk-2-2.png" target="_blank">bdf99e6</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-2-3.png" width="576" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-3">
+Past versions of unnamed-chunk-2-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/bdf99e62a2809e2292aa0fc52ffe9c1ef6c904bb/docs/figure/DHS_bulk_peak.Rmd/unnamed-chunk-2-3.png" target="_blank">bdf99e6</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="htmlwidget-dd8f1e4ab1981104ac71" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dd8f1e4ab1981104ac71">{"x":{"filter":"none","vertical":false,"data":[["celltypes","Odd_ratio"],["CM","5.1859798"],["Peri","2.6209953"],["Endo","5.6458493"],["Fibro","1.9624549"],["Lymph","0.6606713"],["Mye","0.6220493"],["Neuro","1.2245668"],["SMuscle","5.0019912"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Cardiomyocyte<\/th>\n      <th>Pericyte<\/th>\n      <th>Endothelial<\/th>\n      <th>Fibroblast<\/th>\n      <th>Lymphoid<\/th>\n      <th>Myeloid<\/th>\n      <th>Neuronal<\/th>\n      <th>Smooth Muscle<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-3-2.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-2">
+Past versions of unnamed-chunk-3-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/bdf99e62a2809e2292aa0fc52ffe9c1ef6c904bb/docs/figure/DHS_bulk_peak.Rmd/unnamed-chunk-3-2.png" target="_blank">bdf99e6</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-3-3.png" width="480" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-3">
+Past versions of unnamed-chunk-3-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/bdf99e62a2809e2292aa0fc52ffe9c1ef6c904bb/docs/figure/DHS_bulk_peak.Rmd/unnamed-chunk-3-3.png" target="_blank">bdf99e6</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="results-for-10-times-the-size-of-ocr_1-permutation"
+class="section level1">
+<h1>Results for 10 times the size of <span
+class="math inline">\(OCR_{1}\)</span> permutation</h1>
+<p>The permutation workflow:</p>
+<ol style="list-style-type: decimal">
+<li>shifted the original peaks 9 times, 100bp one time, to get a dataset
+(datasetA) that 10 times as the original peak.</li>
+<li>permuted datasetA using shuffle from bedtools to get random ranges
+working as <span class="math inline">\(\overline{OCR_{1}}\)</span> .
+When doing shuffling, we used several options: -excl: to exclude the
+original peaks -seed: to make sure the analyses are reproducible
+-noOverlapping: to make sure the random ranges are not overlap with each
+other</li>
+</ol>
+<p>We did 1 since ‘shuffle’ do not have an option allowing us to shuffle
+10 times, if I used the shuffle command 10 times, the random ranges will
+overlap each other since the ‘-noOverlapping’ only guarantee not
+overlapping within one command.</p>
+<div id="htmlwidget-86ac26e244f66a311ef8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-86ac26e244f66a311ef8">{"x":{"filter":"none","vertical":false,"data":[["Heart \nLV+RV","Dermis \nEndothelial","T cell","B cell","CD14+ \nMonocyte"],[15.0790393993827,7.4970231977687,5.92094631444269,5.01310587756487,4.1749393799692],[12.7437110095507,9.63163048152785,3.92500401044919,4.30147266931318,4.29604845358861],[14.0796477767971,36.5913898290704,10.1611162325868,7.41182023758214,8.39911226424603],[11.6846618001176,9.63997974605362,3.4159511712617,3.22431865828092,5.22531754985567],[6.93324375699111,12.6164470391722,61.4720488683167,37.9602976191206,21.8146919700743],[6.56523161054687,9.93963775769155,8.43903512550007,15.2130141831819,29.9493909674908],[8.90758414406357,10.3622196810835,5.57806423666036,4.43202364433044,6.2514722659918],[23.8190812161069,12.2106268694208,4.52536683712489,5.32321140136927,7.71111983725549]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>CM<\/th>\n      <th>Peri<\/th>\n      <th>Endo<\/th>\n      <th>Fibro<\/th>\n      <th>Lymph<\/th>\n      <th>Mye<\/th>\n      <th>Neuro<\/th>\n      <th>SMuscle<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-4-2.png" width="576" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-2">
+Past versions of unnamed-chunk-4-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/xsun1229/heart_atlas/blob/bdf99e62a2809e2292aa0fc52ffe9c1ef6c904bb/docs/figure/DHS_bulk_peak.Rmd/unnamed-chunk-4-2.png" target="_blank">bdf99e6</a>
+</td>
+<td>
+XSun
+</td>
+<td>
+2022-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-4-3.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="results-for-same-size-permutation" class="section level1">
 <h1>Results for same size permutation</h1>
-<div id="htmlwidget-dd8f1e4ab1981104ac71" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dd8f1e4ab1981104ac71">{"x":{"filter":"none","vertical":false,"data":[["Heart \nLV+RV","Dermis \nEndothelial","T cell","B cell","CD14+ \nMonocyte"],[13.9398715912781,6.80043394592009,6.48743602459547,4.99450459871336,4.0131066107008],[11.5638970480322,9.17770514323255,4.26070866558344,4.0659760550225,4.10667347770582],[13.1155310516324,35.3178754586954,9.30357622650672,7.58504385942024,8.3241912237595],[11.1244175653398,9.02361758799229,3.2916512485322,3.22431865828092,5.30024745327385],[6.5210988468614,11.2218205711019,65.9358641297719,36.8599888293888,20.4258593069335],[5.79904386653529,8.75524207819899,7.73507193610188,15.073354228215,29.4695136017715]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>CM<\/th>\n      <th>Peri<\/th>\n      <th>Endo<\/th>\n      <th>Fibro<\/th>\n      <th>Lymph<\/th>\n      <th>Mye<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-3-2.png" width="576" style="display: block; margin: auto;" /><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-3-3.png" width="576" style="display: block; margin: auto;" /></p>
-<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-4-2.png" width="480" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-81a7fa0dc370fabc5e25" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-81a7fa0dc370fabc5e25">{"x":{"filter":"none","vertical":false,"data":[["Heart \nLV+RV","Dermis \nEndothelial","T cell","B cell","CD14+ \nMonocyte"],[13.9398715912781,6.80043394592009,6.48743602459547,4.99450459871336,4.0131066107008],[11.5638970480322,9.17770514323255,4.26070866558344,4.0659760550225,4.10667347770582],[13.1155310516324,35.3178754586954,9.30357622650672,7.58504385942024,8.3241912237595],[11.1244175653398,9.02361758799229,3.2916512485322,3.22431865828092,5.30024745327385],[6.5210988468614,11.2218205711019,65.9358641297719,36.8599888293888,20.4258593069335],[5.79904386653529,8.75524207819899,7.73507193610188,15.073354228215,29.4695136017715],[8.34440004711185,10.7811451167724,5.54787139092524,4.72786586006444,6.69022285718813],[28.475756313219,14.8414355290145,7.84524781124796,6.26992047403711,10.0252990914815]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>CM<\/th>\n      <th>Peri<\/th>\n      <th>Endo<\/th>\n      <th>Fibro<\/th>\n      <th>Lymph<\/th>\n      <th>Mye<\/th>\n      <th>Neuro<\/th>\n      <th>SMuscle<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-5-2.png" width="576" style="display: block; margin: auto;" /><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-5-3.png" width="576" style="display: block; margin: auto;" /></p>
+<div id="htmlwidget-f51dfbe80cfd47863195" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f51dfbe80cfd47863195">{"x":{"filter":"none","vertical":false,"data":[["celltypes","Odd_ratio"],["CM","5.3629189"],["Peri","2.4991575"],["Endo","5.3963274"],["Fibro","2.0142015"],["Lymph","0.6157212"],["Mye","0.6113356"],["Neuro","1.1470903"],["SMuscle","5.6637499"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Cardiomyocyte<\/th>\n      <th>Pericyte<\/th>\n      <th>Endothelial<\/th>\n      <th>Fibroblast<\/th>\n      <th>Lymphoid<\/th>\n      <th>Myeloid<\/th>\n      <th>Neuronal<\/th>\n      <th>Smooth Muscle<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":10,"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-6-2.png" width="480" style="display: block; margin: auto;" /><img src="figure/DHS_bulk_peak.Rmd/unnamed-chunk-6-3.png" width="480" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -691,8 +986,8 @@ loaded via a namespace (and not attached):
  [39] MatrixGenerics_1.8.0        highr_0.9                  
  [41] fastmap_1.1.0               BSgenome_1.64.0            
  [43] htmlwidgets_1.5.4           rlang_1.0.5                
- [45] GlobalOptions_0.1.2         rstudioapi_0.13            
- [47] impute_1.70.0               farver_2.1.0               
+ [45] GlobalOptions_0.1.2         impute_1.70.0              
+ [47] rstudioapi_0.13             farver_2.1.0               
  [49] shape_1.4.6                 jquerylib_0.1.4            
  [51] BiocIO_1.6.0                generics_0.1.2             
  [53] jsonlite_1.8.0              crosstalk_1.2.0            
@@ -702,26 +997,26 @@ loaded via a namespace (and not attached):
  [61] Matrix_1.4-1                Rcpp_1.0.8.3               
  [63] munsell_0.5.0               fansi_1.0.3                
  [65] lifecycle_1.0.1             stringi_1.7.6              
- [67] yaml_2.3.5                  SummarizedExperiment_1.26.1
- [69] zlibbioc_1.42.0             plyr_1.8.7                 
- [71] parallel_4.2.0              promises_1.2.0.1           
- [73] crayon_1.5.1                lattice_0.20-45            
- [75] Biostrings_2.64.0           hms_1.1.1                  
- [77] circlize_0.4.15             knitr_1.39                 
- [79] pillar_1.7.0                rjson_0.2.21               
- [81] reshape2_1.4.4              codetools_0.2-18           
- [83] XML_3.99-0.9                glue_1.6.2                 
- [85] evaluate_0.15               data.table_1.14.2          
- [87] tzdb_0.3.0                  png_0.1-7                  
- [89] vctrs_0.4.1                 httpuv_1.6.5               
- [91] foreach_1.5.2               gtable_0.3.0               
- [93] purrr_0.3.4                 clue_0.3-61                
- [95] assertthat_0.2.1            xfun_0.30                  
- [97] gridBase_0.4-7              restfulr_0.0.14            
- [99] later_1.3.0                 tibble_3.1.7               
-[101] iterators_1.0.14            GenomicAlignments_1.32.0   
-[103] workflowr_1.7.0             cluster_2.1.3              
-[105] ellipsis_0.3.2             </code></pre>
+ [67] whisker_0.4                 yaml_2.3.5                 
+ [69] SummarizedExperiment_1.26.1 zlibbioc_1.42.0            
+ [71] plyr_1.8.7                  parallel_4.2.0             
+ [73] promises_1.2.0.1            crayon_1.5.1               
+ [75] lattice_0.20-45             Biostrings_2.64.0          
+ [77] hms_1.1.1                   circlize_0.4.15            
+ [79] knitr_1.39                  pillar_1.7.0               
+ [81] rjson_0.2.21                reshape2_1.4.4             
+ [83] codetools_0.2-18            XML_3.99-0.9               
+ [85] glue_1.6.2                  evaluate_0.15              
+ [87] data.table_1.14.2           tzdb_0.3.0                 
+ [89] png_0.1-7                   vctrs_0.4.1                
+ [91] httpuv_1.6.5                foreach_1.5.2              
+ [93] gtable_0.3.0                purrr_0.3.4                
+ [95] clue_0.3-61                 assertthat_0.2.1           
+ [97] xfun_0.30                   gridBase_0.4-7             
+ [99] restfulr_0.0.14             later_1.3.0                
+[101] tibble_3.1.7                iterators_1.0.14           
+[103] GenomicAlignments_1.32.0    workflowr_1.7.0            
+[105] cluster_2.1.3               ellipsis_0.3.2             </code></pre>
 </div>
 </div>
 
