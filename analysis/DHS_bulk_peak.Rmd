@@ -116,12 +116,12 @@ for (i in 1:length(encode.beds)) {
 colnames(odd_all) <- names(markers)
 rownames(odd_all) <- names(encode.beds)
 
-odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Smooth Muscle")]
+odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal")]
 #odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid")]
 odd_heatmap <- odd_re[c("Heart_RVLV","DermisEndothelialBlood","Tcell","Bcell","CD14Monocyte"),]
 
 rownames(odd_heatmap) <- c("Heart \nLV+RV","Dermis \nEndothelial","T cell","B cell","CD14+ \nMonocyte")
-colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye","Neuro","SMuscle")
+colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye","Neuro")
 #colnames(odd_heatmap) <- c("CM","Peri","Endo","Fibro","Lymph", "Mye")
 
 DT::datatable(odd_heatmap, options = list(pageLength =10))
@@ -156,11 +156,11 @@ Heatmap(matrix = odd_log, cluster_rows = F,
 
 ```{r echo=F, message=FALSE, warning=FALSE, paged.print=FALSE,fig.height=5, fig.width=5}
 
-odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal","Smooth Muscle")]
+odd_re <- odd_all[,c("Cardiomyocyte","Pericyte","Endothelial","Fibroblast","Lymphoid","Myeloid","Neuronal")]
 odd_h3k <- data.frame(odd_re["Heart_LVRV",])
 odd_h3k <- cbind(rownames(odd_h3k),odd_h3k)
 colnames(odd_h3k) <- c("celltypes","Odd_ratio")
-odd_h3k$celltypes <- c("CM","Peri","Endo","Fibro","Lymph", "Mye","Neuro","SMuscle")
+odd_h3k$celltypes <- c("CM","Peri","Endo","Fibro","Lymph", "Mye","Neuro")
 odd_h3k$celltypes <- factor(odd_h3k$celltypes,levels = odd_h3k$celltypes)
 
 DT::datatable(t(odd_h3k), options = list(pageLength =10))
